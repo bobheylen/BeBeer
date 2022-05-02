@@ -8,10 +8,11 @@
         <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/activity_maps.xml" value="0.2717391304347826" />
         <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/activity_registration.xml" value="0.22" />
         <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/content_home.xml" value="0.2558876811594203" />
+        <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/activity_registration.xml" value="0.35052083333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

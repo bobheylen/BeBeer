@@ -1,10 +1,12 @@
-package be.kuleuven.bebeer;
+package be.kuleuven.bebeer.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import be.kuleuven.bebeer.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBtnRegister(View caller)
     {
-        Intent intent = new Intent(this, registrationActivity.class);
+        Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
     }
 
