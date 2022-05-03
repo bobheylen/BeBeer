@@ -19,7 +19,7 @@
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
@@ -182,7 +182,8 @@
                 <TextView
                     android:id="@+id/blanco5"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp" />
+                    android:layout_height="30dp"
+                    android:textColor="#FF0000" />
 
                 <TextView
                     android:id="@+id/txtRepeatPassword"
@@ -191,12 +192,18 @@
                     android:text="Repeat Password" />
 
                 <EditText
-                    android:id="@+id/editTextTextPassword3"
+                    android:id="@+id/invPassword3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="e.g. 8 characters"
                     android:inputType="textPassword" />
+
+                <TextView
+                    android:id="@+id/blanco8"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textColor="#FF0000" />
             </LinearLayout>
         </ScrollView>
 

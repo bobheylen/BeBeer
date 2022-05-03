@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +18,6 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 import be.kuleuven.bebeer.R;
-import be.kuleuven.bebeer.activities.HomePageActivity;
 
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -29,6 +29,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText ETaddress;
     private EditText ETpassword1;
     private EditText ETpassword2;
+    private TextView TVpassword2;
+    private TextView TVpassword1;
     private Button btnRegister;
 
     private String username;
@@ -51,37 +53,39 @@ public class RegistrationActivity extends AppCompatActivity {
         ETbirthdate = (EditText) findViewById(R.id.invBirthdate);
         ETphonenumber = (EditText) findViewById(R.id.invPhoneNum);
         ETaddress = (EditText) findViewById(R.id.invAddress);
-        ETpassword1 = (EditText) findViewById(R.id.invPassword);
-        ETpassword2 = (EditText) findViewById(R.id.invPassword2);
-        btnRegister = findViewById(R.id.btnRegister);
-    }
+        ETpassword1 = (EditText) findViewById(R.id.invPassword2);
+        ETpassword2 = (EditText) findViewById(R.id.invPassword3);
+        TVpassword1 = (TextView) findViewById(R.id.blanco5);
+        TVpassword2 = (TextView) findViewById(R.id.blanco8);
 
-    public void onBtnRegister(View caller)
-    {
-        //Intent intent = new Intent(this, HomePageActivity.class);
-        //startActivity(intent);
-        username = ETusername.getText().toString();
-        name = ETname.getText().toString();
-        firstname = ETfirstname.getText().toString();
-        birthdate = ETbirthdate.getText().toString();
-        phonenumber = ETphonenumber.getText().toString();
-        address = ETaddress.getText().toString();
-        password1 = ETpassword1.getText().toString();
-        password2 = ETpassword2.getText().toString();
+        btnRegister = (Button) findViewById(R.id.btnRegister);
 
-        if(password1.equals(password2))
-        {
-            if(password1.length() < 8)
-            {
-                System.out.println("Password too short, minimum is 8 characters!");
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // place your clicking handle code here.
+                getTextInParameters();
+                if (password1.equals(password2))
+                {
+                    if (password1.length() < 8) {
+                        TVpassword1.setText("Password too short!");
+                        TVpassword2.setText("Password too short!");
+                    }
+                    else
+                    {
+                        TVpassword1.setText("");
+                        TVpassword2.setText("");
+                        openHomePageActivity();
+                        //makeInsertRequest("https://studev.groept.be/api/a21pt111/TEST/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate);
+                    }
+                }
+                else
+                {
+                    TVpassword1.setText("");
+                    TVpassword2.setText("Passwords do NOT match!");
+                }
             }
-            else
-            {
-                Intent intent = new Intent(this, HomePageActivity.class);
-                startActivity(intent);
-                //makeInsertRequest("https://studev.groept.be/api/a21pt111/TEST/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate);
-            }
-        }
+        });
     }
 
     public String makeInsertRequest(String urlName) {
@@ -108,5 +112,22 @@ public class RegistrationActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return "";
+    }
+
+
+    public void openHomePageActivity() {
+        Intent intent = new Intent(this, HomePageActivity.class);
+        startActivity(intent);
+    }
+
+    public void getTextInParameters() {
+        username = ETusername.getText().toString();
+        name = ETname.getText().toString();
+        firstname = ETfirstname.getText().toString();
+        birthdate = ETbirthdate.getText().toString();
+        phonenumber = ETphonenumber.getText().toString();
+        address = ETaddress.getText().toString();
+        password1 = ETpassword1.getText().toString();
+        password2 = ETpassword2.getText().toString();
     }
 }
