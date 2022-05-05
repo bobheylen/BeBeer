@@ -8,6 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -65,55 +77,23 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // place your clicking handle code here.
                 getTextInParameters();
-                if (password1.equals(password2))
-                {
+                if (password1.equals(password2)) {
                     if (password1.length() < 8) {
                         TVpassword1.setText("Password too short!");
                         TVpassword2.setText("Password too short!");
-                    }
-                    else
-                    {
+                    } else {
                         TVpassword1.setText("");
                         TVpassword2.setText("");
                         openHomePageActivity();
-                        //makeInsertRequest("https://studev.groept.be/api/a21pt111/TEST/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate);
+                        registerUser();
                     }
-                }
-                else
-                {
+                } else {
                     TVpassword1.setText("");
                     TVpassword2.setText("Passwords do NOT match!");
                 }
             }
         });
     }
-
-    public String makeInsertRequest(String urlName) {
-        BufferedReader rd = null;
-        StringBuilder sb = null;
-        String line = null;
-        try {
-            URL url = new URL(urlName);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            sb = new StringBuilder();
-            while ((line = rd.readLine()) != null) {
-                sb.append(line + '\n');
-            }
-            conn.disconnect();
-            return sb.toString();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
 
     public void openHomePageActivity() {
         Intent intent = new Intent(this, HomePageActivity.class);
@@ -130,4 +110,37 @@ public class RegistrationActivity extends AppCompatActivity {
         password1 = ETpassword1.getText().toString();
         password2 = ETpassword2.getText().toString();
     }
+
+    public void registerUser() {
+        String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate;
+        //String requestURL = "https://studev.groept.be/api/a21pt111/TEST";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, requestURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            String succes = jsonObject.getString("success");
+                            if (succes.equals("1")) {
+                                Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "User could not register", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+
 }
