@@ -112,7 +112,17 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void registerUser() {
-        String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate;
+        StringBuilder sb = new StringBuilder(name);
+        sb.append("/" + username);
+        sb.append("/" + name);
+        sb.append("/" + firstname);
+        sb.append("/" + phonenumber);
+        sb.append("/" + password1);
+        sb.append("/" + address);
+        sb.append("/" + birthdate);
+        sb.toString();
+        String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + sb;
+        //String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate;
         //String requestURL = "https://studev.groept.be/api/a21pt111/TEST";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, requestURL,
                 new Response.Listener<String>() {
@@ -120,13 +130,14 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-
+                            //*************** boodschap ***************
                             String succes = jsonObject.getString("success");
                             if (succes.equals("1")) {
                                 Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(getApplicationContext(), "User could not register", Toast.LENGTH_LONG).show();
                             }
+                            //*************** boodschap ***************
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
