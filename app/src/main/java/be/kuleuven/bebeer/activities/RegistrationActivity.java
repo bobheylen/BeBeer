@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -120,27 +121,16 @@ public class RegistrationActivity extends AppCompatActivity {
         sb.append("/" + password1);
         sb.append("/" + address);
         sb.append("/" + birthdate);
-        sb.toString();
-        String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + sb;
+        String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + sb.toString();
+        System.out.println(requestURL);
         //String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate;
         //String requestURL = "https://studev.groept.be/api/a21pt111/TEST";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, requestURL,
+        //String requestURL = "https://studev.groept.be/api/a21pt111/TEST2/" + username;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            //*************** boodschap ***************
-                            String succes = jsonObject.getString("success");
-                            if (succes.equals("1")) {
-                                Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "User could not register", Toast.LENGTH_LONG).show();
-                            }
-                            //*************** boodschap ***************
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -153,5 +143,4 @@ public class RegistrationActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
     }
-
 }
