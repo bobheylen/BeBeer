@@ -3,18 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/activity_home2.xml" value="0.35520833333333335" />
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/activity_home_page.xml" value="0.22" />
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/activity_home_page2.xml" value="0.13697916666666668" />
         <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/activity_main2.xml" value="0.2558876811594203" />
         <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/activity_maps.xml" value="0.2717391304347826" />
         <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/activity_registration.xml" value="0.22" />
         <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/content_home.xml" value="0.2558876811594203" />
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/fragment_account.xml" value="0.35520833333333335" />
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/fragment_dashboard.xml" value="0.35520833333333335" />
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/fragment_deliver.xml" value="0.35520833333333335" />
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/fragment_home.xml" value="0.35520833333333335" />
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/fragment_notifications.xml" value="0.35520833333333335" />
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/layout/fragment_pikup.xml" value="0.35520833333333335" />
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/menu/bottom_menu.xml" value="0.35520833333333335" />
+        <entry key="..\:/1.antoine/bachelor_2.2/programeren/projectBeBeer/app/src/main/res/menu/bottom_nav_menu.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/activity_home_page.xml" value="0.1734375" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/activity_registration.xml" value="0.35052083333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

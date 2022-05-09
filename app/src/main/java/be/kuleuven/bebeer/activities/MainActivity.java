@@ -15,7 +15,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -107,8 +106,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void openHomePageActivity() {
-        Intent intent = new Intent(this, HomePageActivity.class);
+        Intent intent = new Intent(this, HomePage2Activity.class);
+        startActivity(intent);
+    }
+
+    public void openHomePage2Activity(View caller) {
+        Intent intent = new Intent(this, HomePage2Activity.class);
         startActivity(intent);
     }
 }
