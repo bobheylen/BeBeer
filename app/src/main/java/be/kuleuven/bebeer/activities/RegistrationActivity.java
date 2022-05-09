@@ -44,6 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText ETpassword2;
     private TextView TVpassword2;
     private TextView TVpassword1;
+
     private Button btnRegister;
 
     private String username;
@@ -113,19 +114,17 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void registerUser() {
-        StringBuilder sb = new StringBuilder(name);
-        sb.append("/" + username);
-        sb.append("/" + name);
-        sb.append("/" + firstname);
-        sb.append("/" + phonenumber);
-        sb.append("/" + password1);
-        sb.append("/" + address);
-        sb.append("/" + birthdate);
-        String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + sb.toString();
+        StringBuilder sb = new StringBuilder(name)
+            .append("/" + username)
+            .append("/" + name)
+            .append("/" + firstname)
+            .append("/" + phonenumber)
+            .append("/" + password1)
+            .append("/" + address)
+            .append("/" + birthdate);
+        String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + sb;
         System.out.println(requestURL);
         //String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate;
-        //String requestURL = "https://studev.groept.be/api/a21pt111/TEST";
-        //String requestURL = "https://studev.groept.be/api/a21pt111/TEST2/" + username;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
                 new Response.Listener<String>() {
                     @Override
