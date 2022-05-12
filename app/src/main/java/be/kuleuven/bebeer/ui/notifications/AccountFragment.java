@@ -44,45 +44,18 @@ public class AccountFragment extends Fragment {
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // vanaf hier zelf geschriven
-        btnAccount = (Button) root.findViewById(R.id.btnAccount); //waarom zeten we een root?_______________________________________?
-        txtUsernameAC = (TextView) root.findViewById(R.id.txtUsernameAC);
+        // Vanaf hier zelf geschriven
+        btnAccount = (Button) btnAccount.findViewById(R.id.btnAccount); //waarom zeten we een root?_______________________________________?
+        txtUsernameAC = (TextView) txtUsernameAC.findViewById(R.id.txtUsernameAC);
 
         btnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                RequestQueue requestQueue = Volley.newRequestQueue(this);
-                String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + username;
-                JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                try {
-                                    String responseString = "";
-                                    for (int i = 0; i < response.length(); i++) {
-                                        JSONObject curObject = response.getJSONObject(i);
-                                        responseString += curObject.getString("password");
-                                    }
-                                    passwordFromDB = responseString;
-                                    txtUsernameAC.setText(passwordFromDB);
-                                } catch (JSONException e) {
-                                    Log.e("Database", e.getMessage(), e);
-                                }
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-                requestQueue.add(loginRequest);
+                // place your clicking handle code here.
+                getUsernameFromDatabase();
             }
         });
-
-        //tot heir geschrven
-
+        // Tot hier zelf geschreven
         return root;
     }
 
@@ -91,4 +64,35 @@ public class AccountFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    public void getUsernameFromDatabase() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + username;
+        JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            String responseString = "";
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject curObject = response.getJSONObject(i);
+                                responseString += curObject.getString("password");
+                            }
+                            passwordFromDB = responseString;
+                            txtUsernameAC.setText(passwordFromDB);
+                        } catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(loginRequest);
+    }
+
+
 }
