@@ -4,28 +4,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import be.kuleuven.bebeer.databinding.FragmentDashboardBinding;
+import be.kuleuven.bebeer.databinding.FragmentDeliverBinding;
 
-public class DashboardFragment extends Fragment {
+public class DeliverFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentDeliverBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        DeliverViewModel dashboardViewModel =
+                new ViewModelProvider(this).get(DeliverViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentDeliverBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

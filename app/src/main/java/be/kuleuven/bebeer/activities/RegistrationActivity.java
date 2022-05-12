@@ -98,7 +98,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void openHomePageActivity() {
-        Intent intent = new Intent(this, HomePageActivity.class);
+        Intent intent = new Intent(this, HomePage2Activity.class);
         startActivity(intent);
     }
 
