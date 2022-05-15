@@ -57,7 +57,7 @@
                     android:text="Username" />
 
                 <EditText
-                    android:id="@+id/invUsername2"
+                    android:id="@+id/invUsernameAC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -76,7 +76,7 @@
                     android:text="Name" />
 
                 <EditText
-                    android:id="@+id/invName"
+                    android:id="@+id/invNameAC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -95,7 +95,7 @@
                     android:text="FirstName" />
 
                 <EditText
-                    android:id="@+id/invFirstName"
+                    android:id="@+id/invFirstNameAC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -115,7 +115,7 @@
                     android:text="Birthdate" />
 
                 <EditText
-                    android:id="@+id/invBirthdate"
+                    android:id="@+id/invBirthdateAC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -134,7 +134,7 @@
                     android:text="Phone number" />
 
                 <EditText
-                    android:id="@+id/invPhoneNum"
+                    android:id="@+id/invPhoneNumAC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -153,7 +153,7 @@
                     android:text="Address" />
 
                 <EditText
-                    android:id="@+id/invAddress"
+                    android:id="@+id/invAddressAC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -172,7 +172,7 @@
                     android:text="Password" />
 
                 <EditText
-                    android:id="@+id/invPassword2"
+                    android:id="@+id/invPasswordAC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -192,7 +192,7 @@
                     android:text="Repeat Password" />
 
                 <EditText
-                    android:id="@+id/invPassword3"
+                    android:id="@+id/invPasswordAC2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"

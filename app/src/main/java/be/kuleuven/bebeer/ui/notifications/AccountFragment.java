@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -32,9 +32,22 @@ public class AccountFragment extends Fragment {
 
     private FragmentAccountBinding binding;
     private String username = "bobheylen";
-    private String passwordFromDB;
-    private TextView txtUsernameAC;
-    private Button btnAccount;
+    private EditText invUsernameAC;
+
+    private Button btnSaveAC;
+    private String firstName;
+    private EditText invFirstnameAC;
+    private String name;
+    private EditText invNameAC;
+    private String birthdate;
+    private EditText invbirthdateAC;
+    private int number;
+    private EditText invPhoneNumberAC;
+    private String address;
+    private EditText invAddressAC;
+
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,15 +57,63 @@ public class AccountFragment extends Fragment {
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //---------- Vanaf hier zelf toegevoegd ----------
-        btnAccount = (Button) root.findViewById(R.id.btnAccount); //waarom zeten we een root?_______________________________________?
-        txtUsernameAC = (TextView) root.findViewById(R.id.txtUsernameAC);
 
-        btnAccount.setOnClickListener(new View.OnClickListener() {
+        //vanaf hier zelf geschrven
+
+        invNameAC = (EditText) root.findViewById(R.id.invNameAC);
+        invFirstnameAC = (EditText) root.findViewById(R.id.invFirstNameAC);
+        invbirthdateAC = (EditText) root.findViewById(R.id.invBirthdateAC);
+        invPhoneNumberAC = (EditText) root.findViewById(R.id.invPhoneNumAC);
+        invAddressAC = (EditText) root.findViewById(R.id.invAddressAC);
+        invUsernameAC = (EditText) root.findViewById(R.id.invUsernameAC);
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + username;
+        JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject curObject = response.getJSONObject(i);
+                                name = curObject.getString("name");
+                                firstName = curObject.getString("firstname");
+                                birthdate = curObject.getString("birthdate");
+                                number = curObject.getInt("phonenumber");
+                                address = curObject.getString("address");
+                            }
+                            invUsernameAC.setHint(username);
+                            invFirstnameAC.setHint(firstName);
+                            invNameAC.setHint(name);
+                            invbirthdateAC.setHint(birthdate);
+                            invPhoneNumberAC.setHint(number);
+                            invAddressAC.setHint(address);
+                        } catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(loginRequest);
+
+        //---------- Vanaf hier zelf toegevoegd ----------
+        btnSaveAC = (Button) root.findViewById(R.id.btnSaveAC); //waarom zeten we een root?_______________________________________?
+
+
+
+        btnSaveAC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // place your clicking handle code here.
-                getUsernameFromDatabase();
+                save();
             }
         });
         //---------- Tot hier zelf toegevoegd ----------
@@ -67,33 +128,8 @@ public class AccountFragment extends Fragment {
         binding = null;
     }
 
-    public void getUsernameFromDatabase() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + username;
-        JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            String responseString = "";
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject curObject = response.getJSONObject(i);
-                                responseString += curObject.getString("password");
-                            }
-                            passwordFromDB = responseString;
-                            txtUsernameAC.setText(passwordFromDB);
-                        } catch (JSONException e) {
-                            Log.e("Database", e.getMessage(), e);
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-        requestQueue.add(loginRequest);
+    public void save() {
+
     }
 
 

@@ -14,21 +14,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 
 import be.kuleuven.bebeer.R;
 
@@ -61,14 +48,14 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        ETusername = (EditText) findViewById(R.id.invUsername2);
-        ETname = (EditText) findViewById(R.id.invName);
-        ETfirstname = (EditText) findViewById(R.id.invFirstName);
-        ETbirthdate = (EditText) findViewById(R.id.invBirthdate);
-        ETphonenumber = (EditText) findViewById(R.id.invPhoneNum);
-        ETaddress = (EditText) findViewById(R.id.invAddress);
-        ETpassword1 = (EditText) findViewById(R.id.invPassword2);
-        ETpassword2 = (EditText) findViewById(R.id.invPassword3);
+        ETusername = (EditText) findViewById(R.id.invUsernameAC);
+        ETname = (EditText) findViewById(R.id.invNameAC);
+        ETfirstname = (EditText) findViewById(R.id.invFirstNameAC);
+        ETbirthdate = (EditText) findViewById(R.id.invBirthdateAC);
+        ETphonenumber = (EditText) findViewById(R.id.invPhoneNumAC);
+        ETaddress = (EditText) findViewById(R.id.invAddressAC);
+        ETpassword1 = (EditText) findViewById(R.id.invPasswordAC);
+        ETpassword2 = (EditText) findViewById(R.id.invPasswordAC2);
         TVpassword1 = (TextView) findViewById(R.id.blanco5);
         TVpassword2 = (TextView) findViewById(R.id.blanco8);
 

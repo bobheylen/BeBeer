@@ -6,53 +6,209 @@
     android:layout_height="match_parent"
     tools:context=".ui.notifications.AccountFragment">
 
-    <TextView
-        android:id="@+id/txtUsernameAC"
-        android:layout_width="142dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="80dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/txtFirstnameAC"
-        android:layout_width="141dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUsernameAC" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtLastnameAC"
-        android:layout_width="139dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFirstnameAC" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtAddressAC"
-        android:layout_width="136dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLastnameAC" />
+                <TextView
+                    android:id="@+id/txtUsername2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Username" />
+
+                <EditText
+                    android:id="@+id/invUsernameAC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="e.g. Antoinejvdm"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/blanco1"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name" />
+
+                <EditText
+                    android:id="@+id/invNameAC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="e.g. Heylen"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/blanco2"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/txtFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="FirstName" />
+
+                <EditText
+                    android:id="@+id/invFirstNameAC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="e.g. Bob"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/blanco6"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/txtBirthdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="YYYY-MM-DD"
+                    android:text="Birthdate" />
+
+                <EditText
+                    android:id="@+id/invBirthdateAC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="YYYY-MM-DD"
+                    android:inputType="date" />
+
+                <TextView
+                    android:id="@+id/blanco3"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/txtPhoneNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone number" />
+
+                <EditText
+                    android:id="@+id/invPhoneNumAC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="e.g. 0499918393"
+                    android:inputType="phone" />
+
+                <TextView
+                    android:id="@+id/blanco4"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/txtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address" />
+
+                <EditText
+                    android:id="@+id/invAddressAC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="e.g. bondgenootenlaan 32"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/blanco7"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:id="@+id/txtPassword2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password" />
+
+                <EditText
+                    android:id="@+id/invPasswordAC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="e.g. 8 characters"
+                    android:inputType="textPassword" />
+
+                <TextView
+                    android:id="@+id/blanco5"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textColor="#FF0000" />
+
+                <TextView
+                    android:id="@+id/txtRepeatPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Repeat Password" />
+
+                <EditText
+                    android:id="@+id/invPasswordAC2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="e.g. 8 characters"
+                    android:inputType="textPassword" />
+
+                <TextView
+                    android:id="@+id/blanco8"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textColor="#FF0000" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btnAccount"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnSaveAC"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
-        android:text="Button"
+        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtAccountAC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Account"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
