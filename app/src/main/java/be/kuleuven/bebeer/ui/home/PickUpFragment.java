@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import be.kuleuven.bebeer.databinding.FragmentPikupBinding;
 
-public class PikupFragment extends Fragment {
+public class PickUpFragment extends Fragment {
 
     private FragmentPikupBinding binding;
 

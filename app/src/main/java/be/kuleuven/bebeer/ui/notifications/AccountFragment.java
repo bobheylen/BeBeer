@@ -44,9 +44,9 @@ public class AccountFragment extends Fragment {
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // Vanaf hier zelf geschriven
-        btnAccount = (Button) btnAccount.findViewById(R.id.btnAccount); //waarom zeten we een root?_______________________________________?
-        txtUsernameAC = (TextView) txtUsernameAC.findViewById(R.id.txtUsernameAC);
+        //---------- Vanaf hier zelf toegevoegd ----------
+        btnAccount = (Button) root.findViewById(R.id.btnAccount); //waarom zeten we een root?_______________________________________?
+        txtUsernameAC = (TextView) root.findViewById(R.id.txtUsernameAC);
 
         btnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,9 @@ public class AccountFragment extends Fragment {
                 getUsernameFromDatabase();
             }
         });
-        // Tot hier zelf geschreven
+        //---------- Tot hier zelf toegevoegd ----------
+
+
         return root;
     }
 

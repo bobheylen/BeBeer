@@ -12,7 +12,17 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_activity_home_page2">HomePage2Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Pick-up</string>
+    <string name="title_dashboard">Delivery</string>
+    <string name="title_notifications">Account</string>
+    <string name="lblQty">lblQty</string>
+
+    <string-array name="menu_items">
+        <item>Stella Artois</item>
+        <item>Jupiler</item>
+        <item>Maes</item>
+        <item>Cristal</item>
+        <item>Primus</item>
+        <item>Cara</item>
+    </string-array>
 </resources>

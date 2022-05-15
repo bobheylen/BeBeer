@@ -23,20 +23,20 @@ import org.json.JSONObject;
 
 import be.kuleuven.bebeer.R;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText ETusername;
     private EditText ETpassword;
     private Button btnLogin;
 
-    private String username;
+    public static String usernameFromLogin; // Global variable om ook in andere klasses te kunnen gebruiken
     private String password;
     private String passwordFromDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         ETusername = (EditText) findViewById(R.id.invUsername);
         ETpassword = (EditText) findViewById(R.id.invPassword);
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     public String usernamePasswordCheck() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String requestURL = "https://studev.groept.be/api/a21pt111/getPasswordFromUsername/" + username;
+        String requestURL = "https://studev.groept.be/api/a21pt111/getPasswordFromUsername/" + usernameFromLogin;
         JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -92,13 +92,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     public boolean getTextInParameters() {
-        username = ETusername.getText().toString();
+        LoginActivity.usernameFromLogin = ETusername.getText().toString(); // Global variable om ook in andere klasses te kunnen gebruiken
         password = ETpassword.getText().toString();
-        if (!username.isEmpty() && !password.isEmpty()) {
+        if (!usernameFromLogin.isEmpty() && !password.isEmpty()) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public String getUsernameFromLogin() {
+        return usernameFromLogin;
     }
 
     public void onBtnRegister(View caller) {

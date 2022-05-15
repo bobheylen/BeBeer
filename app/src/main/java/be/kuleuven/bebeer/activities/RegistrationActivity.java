@@ -114,8 +114,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void registerUser() {
-        StringBuilder sb = new StringBuilder(name)
-            .append("/" + username)
+        StringBuilder sb = new StringBuilder(username)
             .append("/" + name)
             .append("/" + firstname)
             .append("/" + phonenumber)
@@ -123,7 +122,6 @@ public class RegistrationActivity extends AppCompatActivity {
             .append("/" + address)
             .append("/" + birthdate);
         String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + sb;
-        System.out.println(requestURL);
         //String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
                 new Response.Listener<String>() {

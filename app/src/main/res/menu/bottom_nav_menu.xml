@@ -4,12 +4,12 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_bick"
-        android:title="Pikup" />
+        android:title="Pick-up" />
 
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_shoping_cart"
-        android:title="Deliver" />
+        android:title="Delivery" />
 
     <item
         android:id="@+id/navigation_notifications"
