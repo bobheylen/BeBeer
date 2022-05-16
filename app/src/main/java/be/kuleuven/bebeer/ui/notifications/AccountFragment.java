@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -25,13 +27,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import be.kuleuven.bebeer.R;
+import be.kuleuven.bebeer.activities.LoginActivity;
 import be.kuleuven.bebeer.databinding.FragmentAccountBinding;
 
 
 public class AccountFragment extends Fragment {
 
     private FragmentAccountBinding binding;
-    private String username = "bobheylen";
+    private String username = LoginActivity.usernameFromLogin;
     private EditText invUsernameAC;
 
     private Button btnSaveAC;
@@ -41,10 +44,16 @@ public class AccountFragment extends Fragment {
     private EditText invNameAC;
     private String birthdate;
     private EditText invbirthdateAC;
-    private int number;
+    private String phoneNum;
     private EditText invPhoneNumberAC;
     private String address;
     private EditText invAddressAC;
+    private String password;
+    private EditText invPassword;
+    private String password2;
+    private EditText invPassword2;
+    private TextView txtPaswordAC;
+    private TextView txtPasword2AC;
 
 
 
@@ -66,54 +75,34 @@ public class AccountFragment extends Fragment {
         invPhoneNumberAC = (EditText) root.findViewById(R.id.invPhoneNumAC);
         invAddressAC = (EditText) root.findViewById(R.id.invAddressAC);
         invUsernameAC = (EditText) root.findViewById(R.id.invUsernameAC);
+        btnSaveAC = (Button) root.findViewById(R.id.btnSaveAC);
+        invPassword = (EditText) root.findViewById(R.id.invPasswordAC);
+        invPassword2 = (EditText) root.findViewById(R.id.invPasswordAC2);
+        txtPaswordAC = (TextView) root.findViewById(R.id.txtPaswordAC);
+        txtPasword2AC = (TextView) root.findViewById(R.id.txtPasword2AC);
 
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + username;
-        JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
 
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject curObject = response.getJSONObject(i);
-                                name = curObject.getString("name");
-                                firstName = curObject.getString("firstname");
-                                birthdate = curObject.getString("birthdate");
-                                number = curObject.getInt("phonenumber");
-                                address = curObject.getString("address");
-                            }
-                            invUsernameAC.setHint(username);
-                            invFirstnameAC.setHint(firstName);
-                            invNameAC.setHint(name);
-                            invbirthdateAC.setHint(birthdate);
-                            invPhoneNumberAC.setHint(number);
-                            invAddressAC.setHint(address);
-                        } catch (JSONException e) {
-                            Log.e("Database", e.getMessage(), e);
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-        requestQueue.add(loginRequest);
-
-        //---------- Vanaf hier zelf toegevoegd ----------
-        btnSaveAC = (Button) root.findViewById(R.id.btnSaveAC); //waarom zeten we een root?_______________________________________?
-
+        getInfo();
 
 
         btnSaveAC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // place your clicking handle code here.
-                save();
+                getTextInParameters();if (password.equals(password2)) {
+                    if (password.length() < 8) {
+                        txtPaswordAC.setText("Password too short!");
+                        txtPasword2AC.setText("Password too short!");
+                    } else {
+                        txtPaswordAC.setText("");
+                        txtPasword2AC.setText("");
+                        save();
+                    }
+                } else {
+                    txtPaswordAC.setText("");
+                    txtPasword2AC.setText("Passwords do NOT match!");
+                }
             }
         });
         //---------- Tot hier zelf toegevoegd ----------
@@ -128,8 +117,87 @@ public class AccountFragment extends Fragment {
         binding = null;
     }
 
-    public void save() {
+    public void getTextInParameters() {
+        username = invUsernameAC.getText().toString();
+        name = invNameAC.getText().toString();
+        firstName = invFirstnameAC.getText().toString();
+        birthdate = invbirthdateAC.getText().toString();
+        phoneNum = invPhoneNumberAC.getText().toString();
+        address = invAddressAC.getText().toString();
+        password = invPassword.getText().toString();
+        password2 = invPassword2.getText().toString();
+    }
 
+    public void save() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        StringBuilder sb = new StringBuilder(name)
+                .append("/" + firstName)
+                .append("/" + phoneNum)
+                .append("/" + password)
+                .append("/" + address)
+                .append("/" + birthdate)
+                .append("/" + username);
+        System.out.println(sb);
+        String requestURL = "https://studev.groept.be/api/a21pt111/updateAccount/" + sb;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(stringRequest);
+    }
+
+    public void getInfo()
+    {
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + username;
+        JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject curObject = response.getJSONObject(i);
+                                name = curObject.getString("name");
+                                firstName = curObject.getString("firstname");
+                                birthdate = curObject.getString("birthdate");
+                                phoneNum = curObject.getString("phonenumber");
+                                address = curObject.getString("address");
+                                password = curObject.getString("password");
+                                System.out.println("name:" + name + "firstname: " + firstName+"birthdate: "+ birthdate+"phoneNum: "+birthdate);
+
+
+                            }
+                            invUsernameAC.setText(username);
+                            invFirstnameAC.setText(firstName);
+                            invNameAC.setText(name);
+                            invbirthdateAC.setText(birthdate);
+                            invPhoneNumberAC.setText(phoneNum);
+                            invAddressAC.setText(address);
+                            invPassword.setText(password);
+                            invPassword2.setText(password);
+                        } catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(loginRequest);
     }
 
 

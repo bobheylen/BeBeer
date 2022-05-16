@@ -56,8 +56,8 @@ public class RegistrationActivity extends AppCompatActivity {
         ETaddress = (EditText) findViewById(R.id.invAddressAC);
         ETpassword1 = (EditText) findViewById(R.id.invPasswordAC);
         ETpassword2 = (EditText) findViewById(R.id.invPasswordAC2);
-        TVpassword1 = (TextView) findViewById(R.id.blanco5);
-        TVpassword2 = (TextView) findViewById(R.id.blanco8);
+        TVpassword1 = (TextView) findViewById(R.id.txtPaswordAC);
+        TVpassword2 = (TextView) findViewById(R.id.txtPasword2AC);
 
         btnRegister = (Button) findViewById(R.id.btnRegister);
 

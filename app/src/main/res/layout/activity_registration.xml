@@ -180,7 +180,7 @@
                     android:inputType="textPassword" />
 
                 <TextView
-                    android:id="@+id/blanco5"
+                    android:id="@+id/txtPaswordAC"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:textColor="#FF0000" />
@@ -200,7 +200,7 @@
                     android:inputType="textPassword" />
 
                 <TextView
-                    android:id="@+id/blanco8"
+                    android:id="@+id/txtPasword2AC"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:textColor="#FF0000" />
