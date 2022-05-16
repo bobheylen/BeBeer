@@ -1,10 +1,12 @@
 package be.kuleuven.bebeer.ui.dashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,9 +32,12 @@ public class DeliverFragment extends Fragment {
 
     private FragmentDeliverBinding binding;
     //----- Aanmaken van fields -----
+    private static final String TAG = "CalendarActivity";
     private Button btnPlus, btnMinus, btnOrder;
     private TextView lblQty;
-    private Spinner spBeer;
+    private Spinner spBeer, spTimeslot;
+    private CalendarView calendarView;
+    private String date;
     //----- Aanmaken van fields -----
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,6 +54,17 @@ public class DeliverFragment extends Fragment {
         btnOrder = root.findViewById(R.id.btnOrder);
         lblQty = root.findViewById(R.id.lblQty);
         spBeer = root.findViewById(R.id.spBeer);
+        spTimeslot = root.findViewById(R.id.spTimeslots);
+        calendarView = root.findViewById(R.id.calendarView);
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+                date = i2 + ":" + i1 + ":" + i;
+                Log.d(TAG, "onSelectedDayChange: date: " + date);
+                System.out.println(date);
+            }
+        });
 
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,10 +113,12 @@ public class DeliverFragment extends Fragment {
     }
 
     public void placeOrder() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         StringBuilder sb = new StringBuilder(LoginActivity.usernameFromLogin)
                 .append("/" + spBeer.getSelectedItem().toString())
-                .append("/" + lblQty.getText().toString());
+                .append("/" + lblQty.getText().toString())
+                .append("/" + date)
+                .append("/" + spTimeslot.getSelectedItem().toString());
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String requestURL = "https://studev.groept.be/api/a21pt111/placeOrder/" + sb;
         System.out.println(requestURL);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
