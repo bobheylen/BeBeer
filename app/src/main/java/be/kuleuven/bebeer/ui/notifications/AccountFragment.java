@@ -143,13 +143,13 @@ public class AccountFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_LONG).show();
+                        toastMsg("Updated account successfully"); // Geeft succes message in App
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        toastMsg("error:" + error.getMessage()); // Geeft error message in App
                     }
                 });
         requestQueue.add(stringRequest);
@@ -200,5 +200,9 @@ public class AccountFragment extends Fragment {
         requestQueue.add(loginRequest);
     }
 
+    public void toastMsg(String msg) {
+        Toast toast = Toast.makeText(getActivity().getApplicationContext(), msg, Toast.LENGTH_LONG);
+        toast.show();
+    }
 
 }

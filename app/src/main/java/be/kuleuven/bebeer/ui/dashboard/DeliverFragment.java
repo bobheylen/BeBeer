@@ -125,16 +125,21 @@ public class DeliverFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //Toast.makeText(getApplicationContext(), "Order placed succesfully!", Toast.LENGTH_LONG).show();
+                        toastMsg("Order placed succesfully"); // Geeft succes message in App
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        toastMsg("error:" + error.getMessage()); // Geeft error message in App
                     }
                 });
         requestQueue.add(stringRequest);
+    }
+
+    public void toastMsg(String msg) {
+        Toast toast = Toast.makeText(getActivity().getApplicationContext(), msg, Toast.LENGTH_LONG);
+        toast.show();
     }
 
 }
