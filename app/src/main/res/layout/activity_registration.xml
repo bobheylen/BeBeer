@@ -65,9 +65,10 @@
                     android:inputType="textPersonName" />
 
                 <TextView
-                    android:id="@+id/blanco1"
+                    android:id="@+id/txtUsernameAC"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp" />
+                    android:layout_height="30dp"
+                    android:textColor="#FF0000" />
 
                 <TextView
                     android:id="@+id/txtName"

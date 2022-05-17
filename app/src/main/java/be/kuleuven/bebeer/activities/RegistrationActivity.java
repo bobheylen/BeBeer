@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +15,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import be.kuleuven.bebeer.R;
 
@@ -31,6 +39,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText ETpassword2;
     private TextView TVpassword2;
     private TextView TVpassword1;
+    private TextView TVusername;
 
     private Button btnRegister;
 
@@ -42,6 +51,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private String address;
     private String password1;
     private String password2;
+
+    private ArrayList<String> users = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +69,19 @@ public class RegistrationActivity extends AppCompatActivity {
         ETpassword2 = (EditText) findViewById(R.id.invPasswordAC2);
         TVpassword1 = (TextView) findViewById(R.id.txtPaswordAC);
         TVpassword2 = (TextView) findViewById(R.id.txtPasword2AC);
+        TVusername = (TextView) findViewById(R.id.txtUsernameAC);
 
         btnRegister = (Button) findViewById(R.id.btnRegister);
+
+        getAllUsername();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // place your clicking handle code here.
+                for(String s : users) {
+                    System.out.println(s);
+                }
                 getTextInParameters();
                 if (password1.equals(password2)) {
                     if (password1.length() < 8) {
@@ -73,8 +90,13 @@ public class RegistrationActivity extends AppCompatActivity {
                     } else {
                         TVpassword1.setText("");
                         TVpassword2.setText("");
-                        openHomePageActivity();
-                        registerUser();
+                        if(testUsernameAlreadyExist()) {
+                            openHomePageActivity();
+                            registerUser();
+                        }
+                        else{
+                            TVusername.setText("Username already exist!");
+                        }
                     }
                 } else {
                     TVpassword1.setText("");
@@ -126,5 +148,43 @@ public class RegistrationActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
+    }
+
+    public void getAllUsername()
+    {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String requestURL = "https://studev.groept.be/api/a21pt111/testUsernameAlreadyExist";
+        JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject curObject = response.getJSONObject(i);
+                                String x = curObject.getString("username");
+                                users.add(x);
+                            }
+                        } catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(loginRequest);
+    }
+
+    public boolean testUsernameAlreadyExist(){
+        if(users.contains(username))
+        {
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }
