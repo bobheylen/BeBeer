@@ -18,7 +18,7 @@
     <string name="lblQty">lblQty</string>
 
     <string-array name="menu_items">
-        <item>Stella Artois</item>
+        <item>StellaArtois</item>
         <item>Jupiler</item>
         <item>Maes</item>
         <item>Cristal</item>

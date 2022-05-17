@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Spinner;
@@ -22,8 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.sql.SQLOutput;
-
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.LoginActivity;
 import be.kuleuven.bebeer.databinding.FragmentDeliverBinding;
@@ -34,7 +33,7 @@ public class DeliverFragment extends Fragment {
     //----- Aanmaken van fields -----
     private static final String TAG = "CalendarActivity";
     private Button btnPlus, btnMinus, btnOrder;
-    private TextView lblQty;
+    private TextView lblQty,lblPrice;
     private Spinner spBeer, spTimeslot;
     private CalendarView calendarView;
     private String date;
@@ -53,9 +52,24 @@ public class DeliverFragment extends Fragment {
         btnMinus = root.findViewById(R.id.btnMinus);
         btnOrder = root.findViewById(R.id.btnOrder);
         lblQty = root.findViewById(R.id.lblQty);
+        lblPrice = root.findViewById(R.id.lblThePrice);
         spBeer = root.findViewById(R.id.spBeer);
         spTimeslot = root.findViewById(R.id.spTimeslots);
         calendarView = root.findViewById(R.id.calendarView);
+
+        setNewPrice(); // Set price when creating fragment
+
+        spBeer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                setNewPrice(); // Set price when changing beer
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // Always something selected in our case
+            }
+        });
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -75,6 +89,8 @@ public class DeliverFragment extends Fragment {
                 lblQty.setText(Integer.toString(quantity));
                 btnMinus.setEnabled(true);
                 btnOrder.setEnabled(true);
+
+                setNewPrice(); // Set price when you change quantity
             }
         });
 
@@ -92,6 +108,8 @@ public class DeliverFragment extends Fragment {
                 {
                     lblQty.setText(Integer.toString(quantity));
                 }
+
+                setNewPrice(); // Set price when you change quantity
             }
         });
 
@@ -116,6 +134,7 @@ public class DeliverFragment extends Fragment {
         StringBuilder sb = new StringBuilder(LoginActivity.usernameFromLogin)
                 .append("/" + spBeer.getSelectedItem().toString())
                 .append("/" + lblQty.getText().toString())
+                .append("/" + lblPrice.getText().toString())
                 .append("/" + date)
                 .append("/" + spTimeslot.getSelectedItem().toString());
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -142,4 +161,44 @@ public class DeliverFragment extends Fragment {
         toast.show();
     }
 
+    public void setNewPrice()
+    {
+        String price = "";
+        double qty = Double.parseDouble(lblQty.getText().toString());
+        String beer = spBeer.getSelectedItem().toString();
+        switch (beer) {
+            case "StellaArtois":
+                double priceStella = 19.75;
+                price = qty*priceStella+"";
+                lblPrice.setText(price);
+                break;
+            case "Jupiler":
+                double priceJupiler = 21.25;
+                price = qty*priceJupiler+"";
+                lblPrice.setText(price);
+                break;
+            case "Maes":
+                double priceMaes = 11.25;
+                price = qty*priceMaes+"";
+                lblPrice.setText(price);
+                break;
+            case "Cristal":
+                double priceCristal = 31.25;
+                price = qty*priceCristal+"";
+                lblPrice.setText(price);
+                break;
+            case "Primus":
+                double pricePrimus = 15.25;
+                price = qty*pricePrimus+"";
+                lblPrice.setText(price);
+                break;
+            case "Cara":
+                double priceCara = 1.25;
+                price = qty*priceCara+"";
+                lblPrice.setText(price);
+                break;
+            default:
+                break;
+        }
+    }
 }
