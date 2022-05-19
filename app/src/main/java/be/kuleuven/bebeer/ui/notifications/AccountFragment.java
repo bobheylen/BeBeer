@@ -26,6 +26,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.LoginActivity;
 import be.kuleuven.bebeer.databinding.FragmentAccountBinding;
@@ -54,9 +57,9 @@ public class AccountFragment extends Fragment {
     private EditText invPassword2;
     private TextView txtPaswordAC;
     private TextView txtPasword2AC;
+    private TextView txtUsernameAC;
 
-
-
+    private ArrayList<String> users = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -80,11 +83,11 @@ public class AccountFragment extends Fragment {
         invPassword2 = (EditText) root.findViewById(R.id.invPasswordAC2);
         txtPaswordAC = (TextView) root.findViewById(R.id.txtPaswordAC);
         txtPasword2AC = (TextView) root.findViewById(R.id.txtPasword2AC);
-
+        txtUsernameAC = (TextView) root.findViewById(R.id.txtUsernameAC);
 
 
         getInfo();
-
+        getAllUsername();
 
         btnSaveAC.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +100,11 @@ public class AccountFragment extends Fragment {
                     } else {
                         txtPaswordAC.setText("");
                         txtPasword2AC.setText("");
-                        save();
+                        if (testUsernameAlreadyExist()) {
+                            save();
+                        } else {
+                            txtUsernameAC.setText("Username already exist!");
+                        }
                     }
                 } else {
                     txtPaswordAC.setText("");
@@ -198,6 +205,48 @@ public class AccountFragment extends Fragment {
                     }
                 });
         requestQueue.add(loginRequest);
+    }
+
+    public void getAllUsername() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String requestURL = "https://studev.groept.be/api/a21pt111/testUsernameAlreadyExist";
+        JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject curObject = response.getJSONObject(i);
+                                String x = curObject.getString("username");
+                                users.add(x);
+                            }
+                        } catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(loginRequest);
+    }
+
+    public boolean testUsernameAlreadyExist() {
+        if(username.equals(LoginActivity.usernameFromLogin))
+        {
+            return true;
+        }
+        else
+        {
+            if (users.contains(username)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 
     public void toastMsg(String msg) {

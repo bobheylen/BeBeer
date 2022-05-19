@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class DeliverFragment extends Fragment {
     private Button btnPlus, btnMinus, btnOrder;
     private TextView lblQty,lblPrice;
     private Spinner spBeer, spTimeslot;
+    private ImageView imgBeer;
     private CalendarView calendarView;
     private String date;
     //----- Aanmaken van fields -----
@@ -55,6 +57,7 @@ public class DeliverFragment extends Fragment {
         lblPrice = root.findViewById(R.id.lblThePrice);
         spBeer = root.findViewById(R.id.spBeer);
         spTimeslot = root.findViewById(R.id.spTimeslots);
+        imgBeer = root.findViewById(R.id.imgBeer);
         calendarView = root.findViewById(R.id.calendarView);
 
         setNewPrice(); // Set price when creating fragment
@@ -171,31 +174,37 @@ public class DeliverFragment extends Fragment {
                 double priceStella = 19.75;
                 price = qty*priceStella+"";
                 lblPrice.setText(price);
+                imgBeer.setImageResource(R.drawable.bakstellanobackground);
                 break;
             case "Jupiler":
                 double priceJupiler = 21.25;
                 price = qty*priceJupiler+"";
                 lblPrice.setText(price);
+                imgBeer.setImageResource(R.drawable.bakjupilernobackground);
                 break;
             case "Maes":
                 double priceMaes = 11.25;
                 price = qty*priceMaes+"";
                 lblPrice.setText(price);
+                imgBeer.setImageResource(R.drawable.bakmaesnobackground);
                 break;
             case "Cristal":
                 double priceCristal = 31.25;
                 price = qty*priceCristal+"";
                 lblPrice.setText(price);
+                imgBeer.setImageResource(R.drawable.bakcristalnobackground);
                 break;
             case "Primus":
                 double pricePrimus = 15.25;
                 price = qty*pricePrimus+"";
                 lblPrice.setText(price);
+                imgBeer.setImageResource(R.drawable.bakprimusnobackground);
                 break;
             case "Cara":
                 double priceCara = 1.25;
                 price = qty*priceCara+"";
                 lblPrice.setText(price);
+                imgBeer.setImageResource(R.drawable.bakcaranobackground);
                 break;
             default:
                 break;

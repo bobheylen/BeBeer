@@ -79,9 +79,6 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // place your clicking handle code here.
-                for(String s : users) {
-                    System.out.println(s);
-                }
                 getTextInParameters();
                 if (password1.equals(password2)) {
                     if (password1.length() < 8) {
@@ -90,11 +87,10 @@ public class RegistrationActivity extends AppCompatActivity {
                     } else {
                         TVpassword1.setText("");
                         TVpassword2.setText("");
-                        if(testUsernameAlreadyExist()) {
+                        if (testUsernameAlreadyExist()) {
                             openHomePageActivity();
                             registerUser();
-                        }
-                        else{
+                        } else {
                             TVusername.setText("Username already exist!");
                         }
                     }
@@ -124,12 +120,12 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public void registerUser() {
         StringBuilder sb = new StringBuilder(username)
-            .append("/" + name)
-            .append("/" + firstname)
-            .append("/" + phonenumber)
-            .append("/" + password1)
-            .append("/" + address)
-            .append("/" + birthdate);
+                .append("/" + name)
+                .append("/" + firstname)
+                .append("/" + phonenumber)
+                .append("/" + password1)
+                .append("/" + address)
+                .append("/" + birthdate);
         String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + sb;
         //String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
@@ -150,8 +146,7 @@ public class RegistrationActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    public void getAllUsername()
-    {
+    public void getAllUsername() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String requestURL = "https://studev.groept.be/api/a21pt111/testUsernameAlreadyExist";
         JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -178,12 +173,10 @@ public class RegistrationActivity extends AppCompatActivity {
         requestQueue.add(loginRequest);
     }
 
-    public boolean testUsernameAlreadyExist(){
-        if(users.contains(username))
-        {
+    public boolean testUsernameAlreadyExist() {
+        if (users.contains(username)) {
             return false;
-        }
-        else{
+        } else {
             return true;
         }
     }
