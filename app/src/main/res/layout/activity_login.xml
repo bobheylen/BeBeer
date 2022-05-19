@@ -25,7 +25,7 @@
         android:id="@+id/invUsername"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="e.g. Antoine"
         android:inputType="textPersonName"
