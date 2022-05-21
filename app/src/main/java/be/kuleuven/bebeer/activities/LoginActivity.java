@@ -2,6 +2,7 @@ package be.kuleuven.bebeer.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GoogleApiAvailabilityLight;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +28,8 @@ import org.json.JSONObject;
 import be.kuleuven.bebeer.R;
 
 public class LoginActivity extends AppCompatActivity {
+
+
 
     private EditText ETusername;
     private EditText ETpassword;
