@@ -27,6 +27,10 @@
     </string-array>
 
     <string-array name="time_slots">
+        <item>14:00-14:30</item>
+        <item>14:30-15:00</item>
+        <item>15:00-15:30</item>
+        <item>15:30-16:00</item>
         <item>16:00-16:30</item>
         <item>16:30-17:00</item>
         <item>17:00-17:30</item>
@@ -40,5 +44,10 @@
         <item>21:00-21:30</item>
         <item>21:30-22:00</item>
     </string-array>
+
+    <string-array name="filter">
+        <item>Recent first</item>
+    </string-array>
+
     <string name="title_activity_maps">MapsActivity</string>
 </resources>

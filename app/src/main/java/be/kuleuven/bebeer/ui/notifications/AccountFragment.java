@@ -1,5 +1,6 @@
 package be.kuleuven.bebeer.ui.notifications;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,9 +27,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+import be.kuleuven.bebeer.activities.OrderActivity;
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.LoginActivity;
 import be.kuleuven.bebeer.databinding.FragmentAccountBinding;
@@ -41,6 +42,7 @@ public class AccountFragment extends Fragment {
     private EditText invUsernameAC;
 
     private Button btnSaveAC;
+    private Button btnOrders;
     private String firstName;
     private EditText invFirstnameAC;
     private String name;
@@ -79,6 +81,7 @@ public class AccountFragment extends Fragment {
         invAddressAC = (EditText) root.findViewById(R.id.invAddressAC);
         invUsernameAC = (EditText) root.findViewById(R.id.invUsernameAC);
         btnSaveAC = (Button) root.findViewById(R.id.btnSaveAC);
+        btnOrders = (Button) root.findViewById(R.id.btnOrders);
         invPassword = (EditText) root.findViewById(R.id.invPasswordAC);
         invPassword2 = (EditText) root.findViewById(R.id.invPasswordAC2);
         txtPaswordAC = (TextView) root.findViewById(R.id.txtPaswordAC);
@@ -110,6 +113,13 @@ public class AccountFragment extends Fragment {
                     txtPaswordAC.setText("");
                     txtPasword2AC.setText("Passwords do NOT match!");
                 }
+            }
+        });
+
+        btnOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openOrderActivity();
             }
         });
         //---------- Tot hier zelf toegevoegd ----------
@@ -252,6 +262,11 @@ public class AccountFragment extends Fragment {
     public void toastMsg(String msg) {
         Toast toast = Toast.makeText(getActivity().getApplicationContext(), msg, Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    public void openOrderActivity() {
+        Intent intent = new Intent(getActivity().getApplicationContext(), OrderActivity.class);
+        startActivity(intent);
     }
 
 }

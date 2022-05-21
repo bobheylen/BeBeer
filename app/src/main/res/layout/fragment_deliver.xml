@@ -213,6 +213,24 @@
                     android:entries="@array/time_slots"
                     android:minHeight="48dp" />
 
+                <TextView
+                    android:id="@+id/lblAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Deliver address" />
+
+                <EditText
+                    android:id="@+id/invAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:ems="10"
+                    android:hint="e.g. Vlamingenstraat 5"
+                    android:inputType="textPersonName" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

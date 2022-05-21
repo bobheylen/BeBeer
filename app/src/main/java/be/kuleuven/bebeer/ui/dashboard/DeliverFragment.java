@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class DeliverFragment extends Fragment {
     private static final String TAG = "CalendarActivity";
     private Button btnPlus, btnMinus, btnOrder;
     private TextView lblQty,lblPrice;
+    private EditText invAddress;
     private Spinner spBeer, spTimeslot;
     private ImageView imgBeer;
     private CalendarView calendarView;
@@ -55,6 +57,7 @@ public class DeliverFragment extends Fragment {
         btnOrder = root.findViewById(R.id.btnOrder);
         lblQty = root.findViewById(R.id.lblQty);
         lblPrice = root.findViewById(R.id.lblThePrice);
+        invAddress = root.findViewById(R.id.invAddress);
         spBeer = root.findViewById(R.id.spBeer);
         spTimeslot = root.findViewById(R.id.spTimeslots);
         imgBeer = root.findViewById(R.id.imgBeer);
@@ -139,7 +142,8 @@ public class DeliverFragment extends Fragment {
                 .append("/" + lblQty.getText().toString())
                 .append("/" + lblPrice.getText().toString())
                 .append("/" + date)
-                .append("/" + spTimeslot.getSelectedItem().toString());
+                .append("/" + spTimeslot.getSelectedItem().toString())
+                .append("/" + invAddress.getText().toString());
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String requestURL = "https://studev.groept.be/api/a21pt111/placeOrder/" + sb;
         System.out.println(requestURL);
