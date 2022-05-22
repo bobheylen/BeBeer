@@ -259,6 +259,8 @@ public class AccountFragment extends Fragment {
         }
     }
 
+
+
     public void toastMsg(String msg) {
         Toast toast = Toast.makeText(getActivity().getApplicationContext(), msg, Toast.LENGTH_LONG);
         toast.show();

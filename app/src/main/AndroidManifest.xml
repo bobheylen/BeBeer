@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeBeer">
         <activity
+            android:name=".activities.MakePikupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GetPikupActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.OrderActivity"
             android:exported="false" />
         <!--

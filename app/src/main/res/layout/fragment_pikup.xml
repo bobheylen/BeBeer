@@ -8,13 +8,24 @@
     tools:context=".ui.home.PickUpFragment">
 
     <Button
-        android:id="@+id/btnOpenMap"
+        android:id="@+id/btnMakePikup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to map"
+        android:layout_marginTop="168dp"
+        android:text="Make Pikup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGetPikup"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnGetPikup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="152dp"
+        android:text="get pikup"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
