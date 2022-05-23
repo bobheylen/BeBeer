@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String usernameFromLogin; // Global variable om ook in andere klasses te kunnen gebruiken
     private String password;
     private String passwordFromDB;
+    private String passwordIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,15 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // place your clicking handle code here.
                 if(getTextInParameters()) {
-                    String passwordIn = usernamePasswordCheck();
-
-                        if (password.equals(passwordIn)) {
-                            openHomePageActivity();
-                            System.out.println("*********************************************Button werkt na 1 klik****************************************************************");
-                        }
-                        else{
-                            txtErrorPassword.setText("Incorect password");
-                        }
+                    usernamePasswordCheck();
                 }
                 else{
                     txtErrorUsername.setText("Mising password or username");
@@ -91,11 +84,22 @@ public class LoginActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject curObject = response.getJSONObject(i);
                                 responseString += curObject.getString("password");
+
                             }
                             passwordFromDB = responseString;
+                            //code om login te doen.
+                            if (passwordFromDB.equals(password)) {
+                                openHomePageActivity();
+                                System.out.println("*********************************************Button werkt na 1 klik****************************************************************");
+                            }
+                            else{
+                                txtErrorPassword.setText("Incorect password");
+                            }
                             System.out.println("Password from database: " + passwordFromDB);
                         } catch (JSONException e) {
-                            Log.e("Database", e.getMessage(), e);
+                            txtErrorPassword.setText("Incorect password or username");
+                            txtErrorUsername.setText("Incorect password or username");
+                            //Log.e("Database", e.getMessage(), e);
                         }
                     }
                 },
