@@ -57,56 +57,41 @@ public class GetPikupActivity extends AppCompatActivity {
         getInfo();
 
 
-        btnPlacePick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                placePickUp();
-            }
+        btnPlacePick.setOnClickListener(view -> placePickUp());
+
+        btnPlus.setOnClickListener(view -> {
+            int quantity = Integer.parseInt(txtAmountOfBack.getText().toString()) + 1;
+            txtAmountOfBack.setText(Integer.toString(quantity));
+            btnMin.setEnabled(true);
+            btnPlacePick.setEnabled(true);
         });
 
-        btnPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int quantity = Integer.parseInt(txtAmountOfBack.getText().toString()) + 1;
+        btnMin.setOnClickListener(view -> {
+            int quantity = Integer.parseInt(txtAmountOfBack.getText().toString()) - 1;
+            if (quantity == 0)
+            {
                 txtAmountOfBack.setText(Integer.toString(quantity));
-                btnMin.setEnabled(true);
-                btnPlacePick.setEnabled(true);
+                btnMin.setEnabled(false);
+                btnPlacePick.setEnabled(false);
+            }
+            else
+            {
+                txtAmountOfBack.setText(Integer.toString(quantity));
             }
         });
 
-        btnMin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int quantity = Integer.parseInt(txtAmountOfBack.getText().toString()) - 1;
-                if (quantity == 0)
-                {
-                    txtAmountOfBack.setText(Integer.toString(quantity));
-                    btnMin.setEnabled(false);
-                    btnPlacePick.setEnabled(false);
-                }
-                else
-                {
-                    txtAmountOfBack.setText(Integer.toString(quantity));
-                }
+        dateView.setOnDateChangeListener((calendarView, i, i1, i2) -> {
+            String i2s = Integer.toString(i2);
+            String i1s = Integer.toString(i1);
+            if(i2 <= 9){
+                i2s = "0" + i2s;
             }
-
-        });
-
-        dateView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                String i2s = Integer.toString(i2);
-                String i1s = Integer.toString(i1);
-                if(i2 <= 9){
-                    i2s = "0" + i2s;
-                }
-                if(i1 <= 9){
-                    i1s = "0" + i1s;
-                }
-                date = i2s + ":" + i1s + ":" + i;
-                Log.d(TAG, "onSelectedDayChange: date: " + date);
-                System.out.println(date);
+            if(i1 <= 9){
+                i1s = "0" + i1s;
             }
+            date = i2s + ":" + i1s + ":" + i;
+            Log.d(TAG, "onSelectedDayChange: date: " + date);
+            System.out.println(date);
         });
 
     }

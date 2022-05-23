@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,21 +8,23 @@
 
     <ImageButton
         android:id="@+id/btnGetPikup"
-        android:layout_width="328dp"
-        android:layout_height="268dp"
+        android:layout_width="320dp"
+        android:layout_height="240dp"
         android:src="@drawable/emptiesgoodsize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/btnMakePikup"
-        android:layout_width="328dp"
-        android:layout_height="268dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="320dp"
+        android:layout_height="240dp"
+        android:layout_marginBottom="48dp"
         android:src="@drawable/knopgetajobgoodsize"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGetPikup" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
