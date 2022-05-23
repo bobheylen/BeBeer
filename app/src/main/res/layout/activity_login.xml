@@ -8,6 +8,16 @@
     tools:context=".activities.LoginActivity">
 
 
+    <TextView
+        android:id="@+id/txtErrorPassword"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="-3dp"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@+id/invPassword"
+        app:layout_constraintTop_toBottomOf="@+id/invPassword" />
+
     <EditText
         android:id="@+id/invPassword"
         android:layout_width="wrap_content"
@@ -99,5 +109,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logobebeer" />
+
+    <TextView
+        android:id="@+id/txtErrorUsername"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="-3dp"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@+id/invUsername"
+        app:layout_constraintTop_toBottomOf="@+id/invUsername" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,32 +1,27 @@
 package be.kuleuven.bebeer.ui.home;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import be.kuleuven.bebeer.MapsActivity;
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.GetPikupActivity;
-import be.kuleuven.bebeer.activities.HomePage2Activity;
-import be.kuleuven.bebeer.activities.LoginActivity;
-import be.kuleuven.bebeer.activities.OrderActivity;
+import be.kuleuven.bebeer.activities.MakePikupActivity;
 import be.kuleuven.bebeer.databinding.FragmentPikupBinding;
 
 public class PickUpFragment extends Fragment {
 
     private FragmentPikupBinding binding;
     // zelf geschrven
-    private Button btnGetPikup;
+    private ImageButton btnGetPikup, btnMakePikup;
 
 
 
@@ -40,7 +35,9 @@ public class PickUpFragment extends Fragment {
         View root = binding.getRoot();
 
         //zelf geschreven
-        btnGetPikup = (Button) root.findViewById(R.id.btnGetPikup);
+        btnGetPikup = (ImageButton) root.findViewById(R.id.btnGetPikup);
+        btnMakePikup = (ImageButton) root.findViewById(R.id.btnMakePikup);
+
 
 
 
@@ -51,12 +48,23 @@ public class PickUpFragment extends Fragment {
             }
         });
 
+        btnMakePikup.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                openMakePikupActivity();
+            }
+        });
+
         // tot heir
 
 
         return root;
     }
 
+    public void openMakePikupActivity(){
+        Intent intent = new Intent(getActivity().getApplicationContext(), MakePikupActivity.class);
+        startActivity(intent);
+    }
 
 
     public void openGetPikupActivity() {

@@ -1,13 +1,16 @@
 package be.kuleuven.bebeer.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,11 +32,13 @@ import be.kuleuven.bebeer.R;
 
 public class GetPikupActivity extends AppCompatActivity {
 
+    private static final String TAG = "CalendarActivity";
     private Button btnPlus, btnMin, btnPlacePick;
     private TextView txtAmountOfBack;
-    private String username = LoginActivity.usernameFromLogin, address;
+    private String username = LoginActivity.usernameFromLogin, address, date;
     private EditText invAddres;
     private Spinner spTime;
+    private CalendarView dateView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public class GetPikupActivity extends AppCompatActivity {
         btnPlacePick = (Button) findViewById(R.id.btnGetPikupPK);
         invAddres = (EditText) findViewById(R.id.invAddresPikup);
         spTime = (Spinner) findViewById(R.id.spTimePikup);
+        dateView = (CalendarView) findViewById(R.id.dateView);
 
         //zelf geschrve
         getInfo();
@@ -86,6 +92,23 @@ public class GetPikupActivity extends AppCompatActivity {
 
         });
 
+        dateView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+                String i2s = Integer.toString(i2);
+                String i1s = Integer.toString(i1);
+                if(i2 <= 9){
+                    i2s = "0" + i2s;
+                }
+                if(i1 <= 9){
+                    i1s = "0" + i1s;
+                }
+                date = i2s + ":" + i1s + ":" + i;
+                Log.d(TAG, "onSelectedDayChange: date: " + date);
+                System.out.println(date);
+            }
+        });
+
     }
 
     public void getInfo()
@@ -124,7 +147,8 @@ public class GetPikupActivity extends AppCompatActivity {
         StringBuilder sb = new StringBuilder(LoginActivity.usernameFromLogin)
                 .append("/" + invAddres.getText().toString())
                 .append("/" + txtAmountOfBack.getText().toString())
-                .append("/" + spTime.getSelectedItem().toString());
+                .append("/" + spTime.getSelectedItem().toString())
+                .append("/" + date);
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String requestURL = "https://studev.groept.be/api/a21pt111/insertPikup/" + sb;
@@ -133,13 +157,13 @@ public class GetPikupActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        toastMsg("Pikup at " + spTime.getSelectedItem().toString() + " sucsais");
+                        toastMsg("Pick-up at " + spTime.getSelectedItem().toString() + " succeed");
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        toastMsg("Pikup failed");
+                        toastMsg("Pick-up failed");
                     }
                 });
         requestQueue.add(stringRequest);

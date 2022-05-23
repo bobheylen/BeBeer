@@ -7,25 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.PickUpFragment">
 
-    <Button
-        android:id="@+id/btnMakePikup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
-        android:text="Make Pikup"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGetPikup"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
+    <ImageButton
         android:id="@+id/btnGetPikup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:text="get pikup"
+        android:layout_width="328dp"
+        android:layout_height="268dp"
+        android:src="@drawable/emptiesgoodsize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnMakePikup"
+        android:layout_width="328dp"
+        android:layout_height="268dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/knopgetajobgoodsize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGetPikup" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

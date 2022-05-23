@@ -80,7 +80,15 @@ public class DeliverFragment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                date = i2 + ":" + i1 + ":" + i;
+                String i2s = Integer.toString(i2);
+                String i1s = Integer.toString(i1);
+                if(i2 <= 9){
+                    i2s = "0" + i2s;
+                }
+                if(i1 <= 9){
+                    i1s = "0" + i1s;
+                }
+                date = i2s + ":" + i1s + ":" + i;
                 Log.d(TAG, "onSelectedDayChange: date: " + date);
                 System.out.println(date);
             }

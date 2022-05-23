@@ -36,10 +36,6 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name=".activities.HomePage2Activity"
             android:exported="false"
             android:label="@string/title_activity_home_page2" />

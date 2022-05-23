@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText ETusername;
     private EditText ETpassword;
     private Button btnLogin;
+    private TextView txtErrorUsername, txtErrorPassword;
 
     public static String usernameFromLogin; // Global variable om ook in andere klasses te kunnen gebruiken
     private String password;
@@ -46,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
 
         ETusername = (EditText) findViewById(R.id.invUsername);
         ETpassword = (EditText) findViewById(R.id.invPassword);
+        txtErrorPassword = (TextView) findViewById(R.id.txtErrorPassword);
+        txtErrorUsername = (TextView) findViewById(R.id.txtErrorUsername);
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
@@ -53,13 +58,22 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // place your clicking handle code here.
-                if (getTextInParameters()) {
-                    usernamePasswordCheck();
-                    if (password.equals(usernamePasswordCheck())) {
-                        openHomePageActivity();
-                        System.out.println("*********************************************Button werkt na 1 klik****************************************************************");
-                    }
+                if(getTextInParameters()) {
+                    String passwordIn = usernamePasswordCheck();
+
+                        if (password.equals(passwordIn)) {
+                            openHomePageActivity();
+                            System.out.println("*********************************************Button werkt na 1 klik****************************************************************");
+                        }
+                        else{
+                            txtErrorPassword.setText("Incorect password");
+                        }
                 }
+                else{
+                    txtErrorUsername.setText("Mising password or username");
+                    txtErrorPassword.setText("Mising password or username");
+                }
+
             }
         });
     }
