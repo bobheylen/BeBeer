@@ -54,7 +54,7 @@ public class DeliverFragment extends Fragment {
         //---------- Vanaf hier zelf toegevoegd ----------
         btnPlus = root.findViewById(R.id.btnPlus);
         btnMinus = root.findViewById(R.id.btnMinus);
-        btnOrder = root.findViewById(R.id.btnOrder);
+        btnOrder = root.findViewById(R.id.btnCancelOrder);
         lblQty = root.findViewById(R.id.lblQty);
         lblPrice = root.findViewById(R.id.lblThePrice);
         invAddress = root.findViewById(R.id.invAddress);

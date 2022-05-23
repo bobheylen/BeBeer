@@ -97,8 +97,8 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             System.out.println("Password from database: " + passwordFromDB);
                         } catch (JSONException e) {
-                            txtErrorPassword.setText("Incorect password or username");
-                            txtErrorUsername.setText("Incorect password or username");
+                            txtErrorPassword.setText("Incorrect password or username");
+                            txtErrorUsername.setText("Incorrect password or username");
                             //Log.e("Database", e.getMessage(), e);
                         }
                     }
