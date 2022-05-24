@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.activities;
+package be.kuleuven.bebeer.pickups;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,33 +21,36 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import be.kuleuven.bebeer.R;
+import be.kuleuven.bebeer.pickups.MyAdapterPickup;
+import be.kuleuven.bebeer.pickups.Pickup;
 
-public class OrderActivity extends AppCompatActivity {
+public class GetPickupActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    MyAdapterOrder myAdapterOrder;
-    ArrayList<Order> list;
+    MyAdapterPickup myAdapterPickup;
+    ArrayList<Pickup> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+        setContentView(R.layout.activity_get_pickup);
 
-        recyclerView = findViewById(R.id.orderlist);
+
+        recyclerView = findViewById(R.id.pickuplist);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager((new LinearLayoutManager(this)));
 
         list = new ArrayList<>();
-        myAdapterOrder = new MyAdapterOrder(this, list);
-        recyclerView.setAdapter(myAdapterOrder);
+        myAdapterPickup = new MyAdapterPickup(this, list);
+        recyclerView.setAdapter(myAdapterPickup);
 
-        getOrdersInRecyclerView();
+        getPickupsInList();
 
     }
 
-    public void getOrdersInRecyclerView() {
+    public void getPickupsInList() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String requestURL = "https://studev.groept.be/api/a21pt111/getOrderParametersInMap/" + LoginActivity.usernameFromLogin;
+        String requestURL = "https://studev.groept.be/api/a21pt111/getAllParamFromPickup";
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, requestURL, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -56,14 +59,15 @@ public class OrderActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject curObject = response.getJSONObject(i);
 
-                                String orderID = curObject.getString("id");
-                                String orderQuantity = curObject.getString("beer") + " " + curObject.getString("quantity") + "x";
-                                String orderDate = "At " + curObject.getString("datum") + " between " + curObject.getString("timeslot");
-                                String orderAddress = curObject.getString("address");
-
-                                Order order = new Order(orderID, orderQuantity, orderDate, orderAddress);
-                                list.add(order);
-                                myAdapterOrder.notifyDataSetChanged();
+                                String pickupID = curObject.getString("id");
+                                String usernameGive = curObject.getString("usernameGive");
+                                String address = curObject.getString("address");
+                                String quantityBak = curObject.getString("quantityBak");
+                                String pickupDate = curObject.getString("pickupDate");
+                                String pickupTime = curObject.getString("pickupTime");
+                                Pickup pickup = new Pickup(pickupID, usernameGive, address, quantityBak, pickupDate, pickupTime);
+                                list.add(pickup);
+                                myAdapterPickup.notifyDataSetChanged();
                             }
                         } catch (JSONException e) {
                             Log.e("Database", e.getMessage(), e);

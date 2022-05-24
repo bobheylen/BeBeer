@@ -1,10 +1,11 @@
-package be.kuleuven.bebeer.activities;
+package be.kuleuven.bebeer.myPickups;
 
 public class MyPickup {
 
-    String myPickupUsername, myPickupFirstname, myPickupLastname, myPickupDate, myPickupTime, myPickupAddress, myPickupQuantity, myPickupPhonenumber;
+    String myPickupID, myPickupUsername, myPickupFirstname, myPickupLastname, myPickupDate, myPickupTime, myPickupAddress, myPickupQuantity, myPickupPhonenumber;
 
-    public MyPickup(String myPickupUsername, String myPickupFirstname, String myPickupLastname, String myPickupDate, String myPickupTime, String myPickupAddress, String myPickupQuantity, String myPickupPhonenumber) {
+    public MyPickup(String myPickupID, String myPickupUsername, String myPickupFirstname, String myPickupLastname, String myPickupDate, String myPickupTime, String myPickupAddress, String myPickupQuantity, String myPickupPhonenumber) {
+        this.myPickupID = myPickupID;
         this.myPickupUsername = myPickupUsername;
         this.myPickupFirstname = myPickupFirstname;
         this.myPickupLastname = myPickupLastname;
@@ -13,6 +14,10 @@ public class MyPickup {
         this.myPickupAddress = myPickupAddress;
         this.myPickupQuantity = myPickupQuantity;
         this.myPickupPhonenumber = myPickupPhonenumber;
+    }
+
+    public String getMyPickupID() {
+        return myPickupID;
     }
 
     public String getMyPickupUsername() {

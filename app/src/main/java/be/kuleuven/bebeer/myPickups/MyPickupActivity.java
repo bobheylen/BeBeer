@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.activities;
+package be.kuleuven.bebeer.myPickups;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +21,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import be.kuleuven.bebeer.R;
+import be.kuleuven.bebeer.activities.LoginActivity;
+import be.kuleuven.bebeer.myPickups.MyAdapterMyPickup;
+import be.kuleuven.bebeer.myPickups.MyPickup;
 
 public class MyPickupActivity extends AppCompatActivity {
 
@@ -56,6 +59,7 @@ public class MyPickupActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject curObject = response.getJSONObject(i);
 
+                                String id = curObject.getString("id");
                                 String usernameBakOwner = curObject.getString("UsernameBakOwner");
                                 String firstname = curObject.getString("firstname");
                                 String name = curObject.getString("name");
@@ -64,7 +68,7 @@ public class MyPickupActivity extends AppCompatActivity {
                                 String pickupAddress = curObject.getString("pickupAddress");
                                 String quantityBak = curObject.getString("quantityBak");
                                 String phonenumber = curObject.getString("phonenumber");
-                                MyPickup myPickup = new MyPickup(usernameBakOwner, firstname, name, pickupDate, pickupTime, pickupAddress, quantityBak, phonenumber);
+                                MyPickup myPickup = new MyPickup(id, usernameBakOwner, firstname, name, pickupDate, pickupTime, pickupAddress, quantityBak, phonenumber);
                                 list.add(myPickup);
                                 myAdapterMyPickup.notifyDataSetChanged();
                             }

@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.activities;
+package be.kuleuven.bebeer.myOrders;
 
 import android.content.Context;
 import android.view.LayoutInflater;

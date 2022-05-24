@@ -49,9 +49,7 @@ public class placePickupActivity extends AppCompatActivity {
         spTime = (Spinner) findViewById(R.id.spTimePikup);
         dateView = (CalendarView) findViewById(R.id.dateView);
 
-        //zelf geschrve
         getInfo();
-
 
         btnPlacePick.setOnClickListener(view -> placePickUp());
 
@@ -64,25 +62,22 @@ public class placePickupActivity extends AppCompatActivity {
 
         btnMin.setOnClickListener(view -> {
             int quantity = Integer.parseInt(txtAmountOfBack.getText().toString()) - 1;
-            if (quantity == 0)
-            {
+            if (quantity == 0) {
                 txtAmountOfBack.setText(Integer.toString(quantity));
                 btnMin.setEnabled(false);
                 btnPlacePick.setEnabled(false);
-            }
-            else
-            {
+            } else {
                 txtAmountOfBack.setText(Integer.toString(quantity));
             }
         });
 
         dateView.setOnDateChangeListener((calendarView, i, i1, i2) -> {
             String i2s = Integer.toString(i2);
-            String i1s = Integer.toString(i1);
-            if(i2 <= 9){
+            String i1s = Integer.toString(i1+1); // +1 omdat het altijd een maand vroeger was (vb: juni was mei)
+            if (i2 <= 9) {
                 i2s = "0" + i2s;
             }
-            if(i1 <= 9){
+            if (i1 <= 9) {
                 i1s = "0" + i1s;
             }
             date = i2s + ":" + i1s + ":" + i;
@@ -92,8 +87,7 @@ public class placePickupActivity extends AppCompatActivity {
 
     }
 
-    public void getInfo()
-    {
+    public void getInfo() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + LoginActivity.usernameFromLogin;
         JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -154,7 +148,6 @@ public class placePickupActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
         toast.show();
     }
-
 
 
 }

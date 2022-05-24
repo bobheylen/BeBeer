@@ -75,35 +75,37 @@ public class RegistrationActivity extends AppCompatActivity {
 
         getAllUsername();
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // place your clicking handle code here.
-                getTextInParameters();
-                if (password1.equals(password2)) {
-                    if (password1.length() < 8) {
-                        TVpassword1.setText("Password too short!");
-                        TVpassword2.setText("Password too short!");
-                    } else {
-                        TVpassword1.setText("");
-                        TVpassword2.setText("");
-                        if (testUsernameAlreadyExist()) {
-                            openHomePageActivity();
-                            registerUser();
-                        } else {
-                            TVusername.setText("Username already exist!");
-                        }
-                    }
+        btnRegister.setOnClickListener(v -> {
+            // place your clicking handle code here.
+            getTextInParameters();
+            if (password1.equals(password2)) {
+                if (password1.length() < 8) {
+                    TVpassword1.setText("Password too short!");
+                    TVpassword2.setText("Password too short!");
                 } else {
                     TVpassword1.setText("");
-                    TVpassword2.setText("Passwords do NOT match!");
+                    TVpassword2.setText("");
+                    if (testUsernameAlreadyExist()) {
+                        openHomePageActivity();
+                        registerUser();
+                        setGlobalVariableUsernameFromLogin();
+                    } else {
+                        TVusername.setText("Username already exist!");
+                    }
                 }
+            } else {
+                TVpassword1.setText("");
+                TVpassword2.setText("Passwords do NOT match!");
             }
         });
     }
 
+    private void setGlobalVariableUsernameFromLogin() {
+        LoginActivity.usernameFromLogin = username;
+    }
+
     public void openHomePageActivity() {
-        Intent intent = new Intent(this, HomePage2Activity.class);
+        Intent intent = new Intent(this, HomePageActivity.class);
         startActivity(intent);
     }
 

@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.ui.dashboard;
+package be.kuleuven.bebeer.ui.delivery;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -40,7 +40,7 @@ public class DeliverFragment extends Fragment {
     //----- Aanmaken van fields -----
     private static final String TAG = "CalendarActivity";
     private Button btnPlus, btnMinus, btnOrder;
-    private TextView lblQty,lblPrice;
+    private TextView lblQty, lblPrice;
     private EditText invAddress;
     private Spinner spBeer, spTimeslot;
     private ImageView imgBeer;
@@ -87,11 +87,11 @@ public class DeliverFragment extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String i2s = Integer.toString(i2);
-                String i1s = Integer.toString(i1);
-                if(i2 <= 9){
+                String i1s = Integer.toString(i1 + 1); // +1 omdat het altijd een maand vroeger was (vb: juni was mei)
+                if (i2 <= 9) {
                     i2s = "0" + i2s;
                 }
-                if(i1 <= 9){
+                if (i1 <= 9) {
                     i1s = "0" + i1s;
                 }
                 date = i2s + ":" + i1s + ":" + i;
@@ -119,14 +119,11 @@ public class DeliverFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int quantity = Integer.parseInt(lblQty.getText().toString()) - 1;
-                if (quantity == 0)
-                {
+                if (quantity == 0) {
                     lblQty.setText(Integer.toString(quantity));
                     btnMinus.setEnabled(false);
                     btnOrder.setEnabled(false);
-                }
-                else
-                {
+                } else {
                     lblQty.setText(Integer.toString(quantity));
                 }
 
@@ -151,8 +148,7 @@ public class DeliverFragment extends Fragment {
         binding = null;
     }
 
-    public void getInfo()
-    {
+    public void getInfo() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + LoginActivity.usernameFromLogin;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -212,45 +208,44 @@ public class DeliverFragment extends Fragment {
         toast.show();
     }
 
-    public void setNewPrice()
-    {
+    public void setNewPrice() {
         String price = "";
         double qty = Double.parseDouble(lblQty.getText().toString());
         String beer = spBeer.getSelectedItem().toString();
         switch (beer) {
             case "StellaArtois":
                 double priceStella = 19.75;
-                price = qty*priceStella+"";
+                price = qty * priceStella + "";
                 lblPrice.setText(price);
                 imgBeer.setImageResource(R.drawable.bakstellanobackground);
                 break;
             case "Jupiler":
                 double priceJupiler = 21.25;
-                price = qty*priceJupiler+"";
+                price = qty * priceJupiler + "";
                 lblPrice.setText(price);
                 imgBeer.setImageResource(R.drawable.bakjupilernobackground);
                 break;
             case "Maes":
                 double priceMaes = 11.25;
-                price = qty*priceMaes+"";
+                price = qty * priceMaes + "";
                 lblPrice.setText(price);
                 imgBeer.setImageResource(R.drawable.bakmaesnobackground);
                 break;
             case "Cristal":
                 double priceCristal = 31.25;
-                price = qty*priceCristal+"";
+                price = qty * priceCristal + "";
                 lblPrice.setText(price);
                 imgBeer.setImageResource(R.drawable.bakcristalnobackground);
                 break;
             case "Primus":
                 double pricePrimus = 15.25;
-                price = qty*pricePrimus+"";
+                price = qty * pricePrimus + "";
                 lblPrice.setText(price);
                 imgBeer.setImageResource(R.drawable.bakprimusnobackground);
                 break;
             case "Cara":
                 double priceCara = 1.25;
-                price = qty*priceCara+"";
+                price = qty * priceCara + "";
                 lblPrice.setText(price);
                 imgBeer.setImageResource(R.drawable.bakcaranobackground);
                 break;

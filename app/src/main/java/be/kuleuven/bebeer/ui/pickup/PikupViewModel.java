@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.ui.home;
+package be.kuleuven.bebeer.ui.pickup;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

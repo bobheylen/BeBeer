@@ -11,17 +11,17 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import be.kuleuven.bebeer.R;
-import be.kuleuven.bebeer.databinding.ActivityHomePage2Binding;
+import be.kuleuven.bebeer.databinding.ActivityHomePageBinding;
 
-public class HomePage2Activity extends AppCompatActivity {
+public class HomePageActivity extends AppCompatActivity {
 
-    private ActivityHomePage2Binding binding;
+    private ActivityHomePageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityHomePage2Binding.inflate(getLayoutInflater());
+        binding = ActivityHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -34,5 +34,4 @@ public class HomePage2Activity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-
 }

@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.ui.notifications;
+package be.kuleuven.bebeer.ui.account;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,8 +29,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import be.kuleuven.bebeer.activities.MyPickupActivity;
-import be.kuleuven.bebeer.activities.OrderActivity;
+import be.kuleuven.bebeer.myPickups.MyPickupActivity;
+import be.kuleuven.bebeer.myOrders.OrderActivity;
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.LoginActivity;
 import be.kuleuven.bebeer.databinding.FragmentAccountBinding;
@@ -97,7 +97,8 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // place your clicking handle code here.
-                getTextInParameters();if (password.equals(password2)) {
+                getTextInParameters();
+                if (password.equals(password2)) {
                     if (password.length() < 8) {
                         txtPaswordAC.setText("Password too short!");
                         txtPasword2AC.setText("Password too short!");
@@ -180,8 +181,7 @@ public class AccountFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    public void getInfo()
-    {
+    public void getInfo() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + username;
         JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -199,7 +199,7 @@ public class AccountFragment extends Fragment {
                                 phoneNum = curObject.getString("phonenumber");
                                 address = curObject.getString("address");
                                 password = curObject.getString("password");
-                                System.out.println("name:" + name + "firstname: " + firstName+"birthdate: "+ birthdate+"phoneNum: "+birthdate);
+                                System.out.println("name:" + name + "firstname: " + firstName + "birthdate: " + birthdate + "phoneNum: " + birthdate);
 
 
                             }
@@ -253,12 +253,9 @@ public class AccountFragment extends Fragment {
     }
 
     public boolean testUsernameAlreadyExist() {
-        if(username.equals(LoginActivity.usernameFromLogin))
-        {
+        if (username.equals(LoginActivity.usernameFromLogin)) {
             return true;
-        }
-        else
-        {
+        } else {
             if (users.contains(username)) {
                 return false;
             } else {
@@ -266,7 +263,6 @@ public class AccountFragment extends Fragment {
             }
         }
     }
-
 
 
     public void toastMsg(String msg) {

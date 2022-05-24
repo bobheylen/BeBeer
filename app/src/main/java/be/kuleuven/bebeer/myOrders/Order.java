@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.activities;
+package be.kuleuven.bebeer.myOrders;
 
 public class Order {
     String orderID, orderQuantity, orderDate, orderAddress;

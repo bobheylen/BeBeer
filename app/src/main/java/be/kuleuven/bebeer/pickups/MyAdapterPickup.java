@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.activities;
+package be.kuleuven.bebeer.pickups;
 
 import android.content.Context;
 import android.util.Log;
@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import be.kuleuven.bebeer.R;
+import be.kuleuven.bebeer.activities.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class MyAdapterPickup extends RecyclerView.Adapter<MyAdapterPickup.MyView
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_pickup,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.item_pickup, parent, false);
         return new MyViewHolder(v);
     }
 
@@ -86,7 +87,7 @@ public class MyAdapterPickup extends RecyclerView.Adapter<MyAdapterPickup.MyView
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(context,"Pickup: " + pickup.getPickupID() + " successfully added to my pick-ups", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Pickup: " + pickup.getPickupID() + " successfully added to my pick-ups", Toast.LENGTH_SHORT).show();
                             }
                         },
                         new Response.ErrorListener() {
@@ -108,13 +109,12 @@ public class MyAdapterPickup extends RecyclerView.Adapter<MyAdapterPickup.MyView
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView pickupUsername, pickupAddress, pickupDate, pickupQuantity;
         Button btnPickup;
 
-        public MyViewHolder(@NonNull View itenView)
-        {
+        public MyViewHolder(@NonNull View itenView) {
             super(itenView);
 
             pickupUsername = itemView.findViewById(R.id.tvPickupUsername);

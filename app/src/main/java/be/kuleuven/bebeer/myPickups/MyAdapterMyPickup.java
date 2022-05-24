@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.activities;
+package be.kuleuven.bebeer.myPickups;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,11 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.IconCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -24,6 +24,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -33,6 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import be.kuleuven.bebeer.R;
+import be.kuleuven.bebeer.activities.LoginActivity;
 
 public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.MyViewHolder> {
 
@@ -75,6 +77,28 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
                 makePhoneCall();
             }
         });
+
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String requestURL = "https://studev.groept.be/api/a21pt111/deleteMyPickup/" + myPickup.getMyPickupID();
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(context,"Pickup: " + myPickup.getMyPickupID() + " successfully deleted", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                RequestQueue queue = Volley.newRequestQueue(context);
+                queue.add(stringRequest);
+            }
+        });
     }
 
     @Override
@@ -85,7 +109,7 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView myPickupUsername, myPickupName, myPickupDate, myPickupAddress, myPickupQuantity, myPickupPhonenumber;
-        Button btnMaps, btnCall;
+        Button btnMaps, btnCall, btnDelete;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -98,6 +122,7 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
             myPickupPhonenumber = itemView.findViewById(R.id.tvMypickupPhonenumber);
             btnMaps = itemView.findViewById(R.id.btnMaps);
             btnCall = itemView.findViewById(R.id.btnCall);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 
@@ -130,7 +155,6 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
                                     String dial = "tel:" + phonenumber;
                                     context.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
                                 }
-
                                 //**************************** phonecall ****************************
                             }
                         } catch (JSONException e) {

@@ -2,11 +2,8 @@ package be.kuleuven.bebeer.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,9 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.GoogleApiAvailabilityLight;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +26,6 @@ import be.kuleuven.bebeer.R;
 public class LoginActivity extends AppCompatActivity {
 
 
-
     private EditText ETusername;
     private EditText ETpassword;
     private Button btnLogin;
@@ -41,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
     public static String usernameFromLogin; // Global variable om ook in andere klasses te kunnen gebruiken
     private String password;
     private String passwordFromDB;
-    private String passwordIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,24 +47,19 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // place your clicking handle code here.
-                if(getTextInParameters()) {
-                    usernamePasswordCheck();
-                }
-                else{
-                    txtErrorUsername.setText("Mising password or username");
-                    txtErrorPassword.setText("Mising password or username");
-                }
-
+        btnLogin.setOnClickListener(v -> {
+            // place your clicking handle code here.
+            if (getTextInParameters()) {
+                usernamePasswordCheck();
+            } else {
+                txtErrorUsername.setText("Mising password or username");
+                txtErrorPassword.setText("Mising password or username");
             }
         });
     }
 
 
-    public String usernamePasswordCheck() {
+    public void usernamePasswordCheck() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String requestURL = "https://studev.groept.be/api/a21pt111/getPasswordFromUsername/" + usernameFromLogin;
         JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -80,20 +67,15 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String responseString = "";
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject curObject = response.getJSONObject(i);
-                                responseString += curObject.getString("password");
-
+                                passwordFromDB = curObject.getString("password");
                             }
-                            passwordFromDB = responseString;
-                            //code om login te doen.
+                            //***** code om login te doen *****
                             if (passwordFromDB.equals(password)) {
                                 openHomePageActivity();
-                                System.out.println("*********************************************Button werkt na 1 klik****************************************************************");
-                            }
-                            else{
-                                txtErrorPassword.setText("Incorect password");
+                            } else {
+                                txtErrorPassword.setText("Incorrect password");
                             }
                             System.out.println("Password from database: " + passwordFromDB);
                         } catch (JSONException e) {
@@ -111,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
         requestQueue.add(loginRequest);
-        return passwordFromDB;
     }
 
 
@@ -136,12 +117,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void openHomePageActivity() {
-        Intent intent = new Intent(this, HomePage2Activity.class);
+        Intent intent = new Intent(this, HomePageActivity.class);
         startActivity(intent);
     }
 
-    public void openHomePage2Activity(View caller) {
-        Intent intent = new Intent(this, HomePage2Activity.class);
-        startActivity(intent);
-    }
 }

@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.activities;
+package be.kuleuven.bebeer.pickups;
 
 public class Pickup {
     String pickupID, pickupUsername, pickupAddress, pickupQuantity, pickupDate, pickupTime;

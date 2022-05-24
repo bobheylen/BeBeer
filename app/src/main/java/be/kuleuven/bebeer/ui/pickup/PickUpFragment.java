@@ -1,4 +1,4 @@
-package be.kuleuven.bebeer.ui.home;
+package be.kuleuven.bebeer.ui.pickup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,16 +13,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.placePickupActivity;
-import be.kuleuven.bebeer.activities.GetPickupActivity;
+import be.kuleuven.bebeer.pickups.GetPickupActivity;
 import be.kuleuven.bebeer.databinding.FragmentPikupBinding;
 
 public class PickUpFragment extends Fragment {
 
     private FragmentPikupBinding binding;
-    // zelf geschrven
-    private ImageButton btnGetPikup, btnMakePikup;
-
-
+    private ImageButton btnGetPickup, btnMakePickup;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -33,34 +30,27 @@ public class PickUpFragment extends Fragment {
         binding = FragmentPikupBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //zelf geschreven
-        btnGetPikup = (ImageButton) root.findViewById(R.id.btnGetPikup);
-        btnMakePikup = (ImageButton) root.findViewById(R.id.btnMakePikup);
+        btnGetPickup = (ImageButton) root.findViewById(R.id.btnGetPikup);
+        btnMakePickup = (ImageButton) root.findViewById(R.id.btnMakePikup);
 
-
-
-
-        btnGetPikup.setOnClickListener(new View.OnClickListener() {
+        btnGetPickup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openGetPikupActivity();
             }
         });
 
-        btnMakePikup.setOnClickListener(new View.OnClickListener(){
+        btnMakePickup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 openMakePikupActivity();
             }
         });
 
-        // tot heir
-
-
         return root;
     }
 
-    public void openMakePikupActivity(){
+    public void openMakePikupActivity() {
         Intent intent = new Intent(getActivity().getApplicationContext(), GetPickupActivity.class);
         startActivity(intent);
     }
