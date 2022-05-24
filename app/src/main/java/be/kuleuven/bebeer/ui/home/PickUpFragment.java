@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -13,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import be.kuleuven.bebeer.R;
-import be.kuleuven.bebeer.activities.GetPikupActivity;
-import be.kuleuven.bebeer.activities.MakePikupActivity;
+import be.kuleuven.bebeer.activities.placePickupActivity;
+import be.kuleuven.bebeer.activities.GetPickupActivity;
 import be.kuleuven.bebeer.databinding.FragmentPikupBinding;
 
 public class PickUpFragment extends Fragment {
@@ -62,13 +61,13 @@ public class PickUpFragment extends Fragment {
     }
 
     public void openMakePikupActivity(){
-        Intent intent = new Intent(getActivity().getApplicationContext(), MakePikupActivity.class);
+        Intent intent = new Intent(getActivity().getApplicationContext(), GetPickupActivity.class);
         startActivity(intent);
     }
 
 
     public void openGetPikupActivity() {
-        Intent intent = new Intent(getActivity().getApplicationContext(), GetPikupActivity.class);
+        Intent intent = new Intent(getActivity().getApplicationContext(), placePickupActivity.class);
         startActivity(intent);
     }
 

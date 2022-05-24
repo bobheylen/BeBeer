@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import be.kuleuven.bebeer.activities.MyPickupActivity;
 import be.kuleuven.bebeer.activities.OrderActivity;
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.LoginActivity;
@@ -41,8 +42,7 @@ public class AccountFragment extends Fragment {
     private String username = LoginActivity.usernameFromLogin;
     private EditText invUsernameAC;
 
-    private Button btnSaveAC;
-    private Button btnOrders;
+    private Button btnSaveAC, btnOrders, btnMypickups;
     private String firstName;
     private EditText invFirstnameAC;
     private String name;
@@ -82,6 +82,7 @@ public class AccountFragment extends Fragment {
         invUsernameAC = (EditText) root.findViewById(R.id.invUsernameAC);
         btnSaveAC = (Button) root.findViewById(R.id.btnSaveAC);
         btnOrders = (Button) root.findViewById(R.id.btnOrders);
+        btnMypickups = (Button) root.findViewById(R.id.btnMypickups);
         invPassword = (EditText) root.findViewById(R.id.invPasswordAC);
         invPassword2 = (EditText) root.findViewById(R.id.invPasswordAC2);
         txtPaswordAC = (TextView) root.findViewById(R.id.txtPaswordAC);
@@ -120,6 +121,13 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 openOrderActivity();
+            }
+        });
+
+        btnMypickups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMypickupActivity();
             }
         });
         //---------- Tot hier zelf toegevoegd ----------
@@ -271,4 +279,8 @@ public class AccountFragment extends Fragment {
         startActivity(intent);
     }
 
+    public void openMypickupActivity() {
+        Intent intent = new Intent(getActivity().getApplicationContext(), MyPickupActivity.class);
+        startActivity(intent);
+    }
 }

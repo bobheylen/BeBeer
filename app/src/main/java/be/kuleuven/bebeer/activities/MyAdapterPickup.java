@@ -45,6 +45,7 @@ public class MyAdapterPickup extends RecyclerView.Adapter<MyAdapterPickup.MyView
         Pickup pickup = list.get(position);
         holder.pickupUsername.setText(pickup.getPickupUsername());
         holder.pickupAddress.setText(pickup.getPickupAddress());
+        holder.pickupDate.setText("At " + pickup.getPickupDate() + " between " + pickup.getPickupTime());
         holder.pickupQuantity.setText(pickup.getPickupQuantity());
 
         holder.btnPickup.setOnClickListener(new View.OnClickListener() {
@@ -109,16 +110,17 @@ public class MyAdapterPickup extends RecyclerView.Adapter<MyAdapterPickup.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView pickupUsername, pickupAddress, pickupQuantity;
+        TextView pickupUsername, pickupAddress, pickupDate, pickupQuantity;
         Button btnPickup;
 
         public MyViewHolder(@NonNull View itenView)
         {
             super(itenView);
 
-            pickupUsername = itemView.findViewById(R.id.tvName);
-            pickupAddress = itemView.findViewById(R.id.tvAddress);
-            pickupQuantity = itemView.findViewById(R.id.tvQuantity);
+            pickupUsername = itemView.findViewById(R.id.tvPickupUsername);
+            pickupAddress = itemView.findViewById(R.id.tvPickupAddress);
+            pickupDate = itemView.findViewById(R.id.tvPickupDate);
+            pickupQuantity = itemView.findViewById(R.id.tvPickupQuantity);
             btnPickup = itenView.findViewById(R.id.btnPickup);
         }
 

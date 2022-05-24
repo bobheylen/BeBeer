@@ -114,7 +114,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnCancelOrder"
+            android:id="@+id/btnMaps"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Cancel order" />

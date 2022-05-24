@@ -1,14 +1,10 @@
 package be.kuleuven.bebeer.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
@@ -30,12 +26,12 @@ import org.json.JSONObject;
 
 import be.kuleuven.bebeer.R;
 
-public class GetPikupActivity extends AppCompatActivity {
+public class placePickupActivity extends AppCompatActivity {
 
     private static final String TAG = "CalendarActivity";
     private Button btnPlus, btnMin, btnPlacePick;
     private TextView txtAmountOfBack;
-    private String username = LoginActivity.usernameFromLogin, address, date;
+    private String address, date;
     private EditText invAddres;
     private Spinner spTime;
     private CalendarView dateView;
@@ -43,7 +39,7 @@ public class GetPikupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get_pikup);
+        setContentView(R.layout.activity_place_pickup);
 
         btnPlus = (Button) findViewById(R.id.btnPlusBack);
         btnMin = (Button) findViewById(R.id.btnMinBack);
@@ -99,7 +95,7 @@ public class GetPikupActivity extends AppCompatActivity {
     public void getInfo()
     {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + username;
+        String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + LoginActivity.usernameFromLogin;
         JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
 
                 new Response.Listener<JSONArray>() {

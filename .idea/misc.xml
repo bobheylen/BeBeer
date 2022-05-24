@@ -27,12 +27,15 @@
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/activity_login.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/activity_make_pikup.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/activity_my_pickups.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/activity_order.xml" value="0.33" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/activity_registration.xml" value="0.35052083333333334" />
-        <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/fragment_account.xml" value="0.33" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/fragment_deliver.xml" value="0.36702954898911355" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/fragment_pikup.xml" value="0.33152173913043476" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/item.xml" value="0.67" />
+        <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/item_mypickup.xml" value="0.33" />
+        <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/item_mypickups.xml" value="0.25" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/item_order.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/layout/item_pickup.xml" value="0.3141592920353982" />
         <entry key="..\:/Users/wheyl/OneDrive - KU Leuven/Documents/KULEUVEN/2BAC/SEM2/Programmeertechnieken/LABOS/BeBeer/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1734375" />

@@ -3,6 +3,7 @@
     package="be.kuleuven.bebeer">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -12,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeBeer">
         <activity
-            android:name=".activities.MakePikupActivity"
+            android:name=".activities.MyPickupActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.GetPikupActivity"
+            android:name=".activities.GetPickupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.placePickupActivity"
             android:exported="false" />
         <activity
             android:name=".activities.OrderActivity"

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import be.kuleuven.bebeer.R;
 
-public class MakePikupActivity extends AppCompatActivity {
+public class GetPickupActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     MyAdapterPickup myAdapterPickup;
@@ -31,7 +31,7 @@ public class MakePikupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_make_pikup);
+        setContentView(R.layout.activity_ger_pickup);
 
 
         recyclerView = findViewById(R.id.pickuplist);

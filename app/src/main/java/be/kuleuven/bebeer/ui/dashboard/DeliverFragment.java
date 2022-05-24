@@ -22,8 +22,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.LoginActivity;
@@ -54,7 +59,7 @@ public class DeliverFragment extends Fragment {
         //---------- Vanaf hier zelf toegevoegd ----------
         btnPlus = root.findViewById(R.id.btnPlus);
         btnMinus = root.findViewById(R.id.btnMinus);
-        btnOrder = root.findViewById(R.id.btnCancelOrder);
+        btnOrder = root.findViewById(R.id.btnMaps);
         lblQty = root.findViewById(R.id.lblQty);
         lblPrice = root.findViewById(R.id.lblThePrice);
         invAddress = root.findViewById(R.id.invAddress);
@@ -64,6 +69,7 @@ public class DeliverFragment extends Fragment {
         calendarView = root.findViewById(R.id.calendarView);
 
         setNewPrice(); // Set price when creating fragment
+        getInfo(); // Set your account address in invAddress
 
         spBeer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -143,6 +149,35 @@ public class DeliverFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void getInfo()
+    {
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + LoginActivity.usernameFromLogin;
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject curObject = response.getJSONObject(i);
+                                String address = curObject.getString("address");
+                                invAddress.setText(address);
+                            }
+                        } catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(request);
     }
 
     public void placeOrder() {
