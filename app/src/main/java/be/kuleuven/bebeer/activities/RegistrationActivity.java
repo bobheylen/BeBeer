@@ -121,11 +121,13 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void registerUser() {
+        LoginActivity login = new LoginActivity();
+        String hashPassword = login.hash(password1);
         StringBuilder sb = new StringBuilder(username)
                 .append("/" + name)
                 .append("/" + firstname)
                 .append("/" + phonenumber)
-                .append("/" + password1)
+                .append("/" + hashPassword)
                 .append("/" + address)
                 .append("/" + birthdate);
         String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + sb;

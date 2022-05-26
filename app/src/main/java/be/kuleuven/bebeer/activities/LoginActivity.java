@@ -21,6 +21,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.sql.SQLOutput;
+
 import be.kuleuven.bebeer.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -33,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String usernameFromLogin; // Global variable om ook in andere klasses te kunnen gebruiken
     private String password;
-    private String passwordFromDB;
+    private String passwordFromDB, hashPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +57,28 @@ public class LoginActivity extends AppCompatActivity {
             // place your clicking handle code here.
             if (getTextInParameters()) {
                 usernamePasswordCheck();
-            } else {
+            }
+            else {
                 txtErrorUsername.setText("Mising password or username");
                 txtErrorPassword.setText("Mising password or username");
             }
         });
+    }
+
+    public static String hash(String ToHashPassword){
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] digestMes = md.digest(ToHashPassword.getBytes());
+
+            BigInteger bigInt = new BigInteger(1, digestMes);
+            System.out.println("hasPassword ingegeven:" + bigInt.toString(16));
+            return bigInt.toString(16);
+        }
+
+        catch(Exception e){
+        }
+        return "";
     }
 
 
@@ -72,7 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                                 passwordFromDB = curObject.getString("password");
                             }
                             //***** code om login te doen *****
-                            if (passwordFromDB.equals(password)) {
+                            hashPassword = hash(password);
+                            if (passwordFromDB.equals(hashPassword)) {
                                 openHomePageActivity();
                             } else {
                                 txtErrorPassword.setText("Incorrect password");

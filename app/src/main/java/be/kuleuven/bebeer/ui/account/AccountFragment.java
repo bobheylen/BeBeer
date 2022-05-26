@@ -150,8 +150,12 @@ public class AccountFragment extends Fragment {
         birthdate = invbirthdateAC.getText().toString();
         phoneNum = invPhoneNumberAC.getText().toString();
         address = invAddressAC.getText().toString();
-        password = invPassword.getText().toString();
-        password2 = invPassword2.getText().toString();
+
+        if(!(invPassword.getText().toString() == "")){
+            LoginActivity LA = new LoginActivity();
+            password =LA.hash(invPassword.getText().toString());
+            password2 = LA.hash(invPassword.getText().toString());
+        }
     }
 
     public void save() {
@@ -163,6 +167,7 @@ public class AccountFragment extends Fragment {
                 .append("/" + address)
                 .append("/" + birthdate)
                 .append("/" + username);
+
         System.out.println(sb);
         String requestURL = "https://studev.groept.be/api/a21pt111/updateAccount/" + sb;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
@@ -209,8 +214,8 @@ public class AccountFragment extends Fragment {
                             invbirthdateAC.setText(birthdate);
                             invPhoneNumberAC.setText(phoneNum);
                             invAddressAC.setText(address);
-                            invPassword.setText(password);
-                            invPassword2.setText(password);
+                            invPassword.setText("");
+                            invPassword2.setText("");
                         } catch (JSONException e) {
                             Log.e("Database", e.getMessage(), e);
                         }
