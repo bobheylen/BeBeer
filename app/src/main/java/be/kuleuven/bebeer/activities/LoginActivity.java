@@ -57,15 +57,14 @@ public class LoginActivity extends AppCompatActivity {
             // place your clicking handle code here.
             if (getTextInParameters()) {
                 usernamePasswordCheck();
-            }
-            else {
+            } else {
                 txtErrorUsername.setText("Mising password or username");
                 txtErrorPassword.setText("Mising password or username");
             }
         });
     }
 
-    public static String hash(String ToHashPassword){
+    public static String hash(String ToHashPassword) {
 
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -74,9 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             BigInteger bigInt = new BigInteger(1, digestMes);
             System.out.println("hasPassword ingegeven:" + bigInt.toString(16));
             return bigInt.toString(16);
-        }
-
-        catch(Exception e){
+        } catch (Exception e) {
         }
         return "";
     }

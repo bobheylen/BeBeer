@@ -73,7 +73,7 @@ public class placePickupActivity extends AppCompatActivity {
 
         dateView.setOnDateChangeListener((calendarView, i, i1, i2) -> {
             String i2s = Integer.toString(i2);
-            String i1s = Integer.toString(i1+1); // +1 omdat het altijd een maand vroeger was (vb: juni was mei)
+            String i1s = Integer.toString(i1 + 1); // +1 omdat het altijd een maand vroeger was (vb: juni was mei)
             if (i2 <= 9) {
                 i2s = "0" + i2s;
             }

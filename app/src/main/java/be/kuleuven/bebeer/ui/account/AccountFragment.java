@@ -151,9 +151,9 @@ public class AccountFragment extends Fragment {
         phoneNum = invPhoneNumberAC.getText().toString();
         address = invAddressAC.getText().toString();
 
-        if(!(invPassword.getText().toString() == "")){
+        if (!(invPassword.getText().toString() == "")) {
             LoginActivity LA = new LoginActivity();
-            password =LA.hash(invPassword.getText().toString());
+            password = LA.hash(invPassword.getText().toString());
             password2 = LA.hash(invPassword.getText().toString());
         }
     }

@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,12 +30,14 @@ public class GetPickupActivity extends AppCompatActivity implements RecyclerView
     RecyclerView recyclerView;
     MyAdapterPickup myAdapterPickup;
     ArrayList<Pickup> list;
+    private TextView txtNoEmpties;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_pickup);
 
+        txtNoEmpties = findViewById(R.id.txtNoEmpties);
 
         recyclerView = findViewById(R.id.pickuplist);
         recyclerView.setHasFixedSize(true);
@@ -68,6 +72,8 @@ public class GetPickupActivity extends AppCompatActivity implements RecyclerView
                                 Pickup pickup = new Pickup(pickupID, usernameGive, address, quantityBak, pickupDate, pickupTime);
                                 list.add(pickup);
                                 myAdapterPickup.notifyDataSetChanged();
+
+                                txtNoEmpties.setVisibility(View.INVISIBLE);
                             }
                         } catch (JSONException e) {
                             Log.e("Database", e.getMessage(), e);

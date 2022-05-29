@@ -89,7 +89,7 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(context,"Pickup: " + myPickup.getMyPickupID() + " successfully deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Pickup: " + myPickup.getMyPickupID() + " successfully deleted", Toast.LENGTH_SHORT).show();
                                 recyclerViewClickInerface.updateRecyclerview();
                             }
                         },

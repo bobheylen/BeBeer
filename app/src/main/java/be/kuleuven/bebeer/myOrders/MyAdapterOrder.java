@@ -23,7 +23,7 @@ import be.kuleuven.bebeer.activities.RecyclerViewClickInerface;
 
 import java.util.ArrayList;
 
-public class MyAdapterOrder extends RecyclerView.Adapter<MyAdapterOrder.MyViewHolder>{
+public class MyAdapterOrder extends RecyclerView.Adapter<MyAdapterOrder.MyViewHolder> {
 
     Context context;
     ArrayList<Order> list;
@@ -38,7 +38,7 @@ public class MyAdapterOrder extends RecyclerView.Adapter<MyAdapterOrder.MyViewHo
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_order,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.item_order, parent, false);
         return new MyViewHolder(v);
     }
 
@@ -58,7 +58,7 @@ public class MyAdapterOrder extends RecyclerView.Adapter<MyAdapterOrder.MyViewHo
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(context,"Order: " + order.getOrderID() + " successfully canceled", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Order: " + order.getOrderID() + " successfully canceled", Toast.LENGTH_SHORT).show();
                                 recyclerViewClickInerface.updateRecyclerview();
                             }
                         },
@@ -79,7 +79,7 @@ public class MyAdapterOrder extends RecyclerView.Adapter<MyAdapterOrder.MyViewHo
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView orderID, orderQuantity, orderDate, orderAddress;
         Button btnCancelOrder;

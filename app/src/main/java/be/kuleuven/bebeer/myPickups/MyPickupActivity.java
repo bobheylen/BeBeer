@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,11 +33,14 @@ public class MyPickupActivity extends AppCompatActivity implements RecyclerViewC
     RecyclerView recyclerView;
     MyAdapterMyPickup myAdapterMyPickup;
     ArrayList<MyPickup> list;
+    private TextView txtNoMyPickups;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_pickups);
+
+        txtNoMyPickups = findViewById(R.id.txtNoMyPickups);
 
         recyclerView = findViewById(R.id.mypickuplist);
         recyclerView.setHasFixedSize(true);
@@ -48,8 +53,7 @@ public class MyPickupActivity extends AppCompatActivity implements RecyclerViewC
         getMyPickupsInRecyclerView();
     }
 
-    public void getMyPickupsInRecyclerView()
-    {
+    public void getMyPickupsInRecyclerView() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String requestURL = "https://studev.groept.be/api/a21pt111/getAllParamFromMypickup/" + LoginActivity.usernameFromLogin;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -72,6 +76,8 @@ public class MyPickupActivity extends AppCompatActivity implements RecyclerViewC
                                 MyPickup myPickup = new MyPickup(id, usernameBakOwner, firstname, name, pickupDate, pickupTime, pickupAddress, quantityBak, phonenumber);
                                 list.add(myPickup);
                                 myAdapterMyPickup.notifyDataSetChanged();
+
+                                txtNoMyPickups.setVisibility(View.INVISIBLE);
                             }
                         } catch (JSONException e) {
                             Log.e("Database", e.getMessage(), e);

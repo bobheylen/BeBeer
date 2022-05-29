@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="be.kuleuven.bebeer.ui.pickup.PickUpFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_pikup" />
+        tools:layout="@layout/fragment_pickup" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
