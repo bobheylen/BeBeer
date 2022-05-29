@@ -85,6 +85,7 @@ public class MyPickupActivity extends AppCompatActivity implements RecyclerViewC
                     }
                 });
         requestQueue.add(request);
+        myAdapterMyPickup.notifyDataSetChanged();
     }
 
     @Override

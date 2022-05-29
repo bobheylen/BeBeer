@@ -82,6 +82,7 @@ public class OrderActivity extends AppCompatActivity implements RecyclerViewClic
                     }
                 });
         requestQueue.add(request);
+        myAdapterOrder.notifyDataSetChanged();
     }
 
     @Override

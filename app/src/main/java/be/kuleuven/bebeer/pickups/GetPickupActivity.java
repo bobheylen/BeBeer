@@ -81,6 +81,7 @@ public class GetPickupActivity extends AppCompatActivity implements RecyclerView
                     }
                 });
         requestQueue.add(request);
+        myAdapterPickup.notifyDataSetChanged();
     }
 
     @Override
