@@ -14,11 +14,11 @@ import androidx.lifecycle.ViewModelProvider;
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.placePickupActivity;
 import be.kuleuven.bebeer.pickups.GetPickupActivity;
-import be.kuleuven.bebeer.databinding.FragmentPikupBinding;
+import be.kuleuven.bebeer.databinding.FragmentPickupBinding;
 
 public class PickUpFragment extends Fragment {
 
-    private FragmentPikupBinding binding;
+    private FragmentPickupBinding binding;
     private ImageButton btnGetPickup, btnMakePickup;
 
 
@@ -27,7 +27,7 @@ public class PickUpFragment extends Fragment {
         PikupViewModel homeViewModel =
                 new ViewModelProvider(this).get(PikupViewModel.class);
 
-        binding = FragmentPikupBinding.inflate(inflater, container, false);
+        binding = FragmentPickupBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         btnGetPickup = (ImageButton) root.findViewById(R.id.btnGetPikup);
