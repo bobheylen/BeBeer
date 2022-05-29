@@ -43,11 +43,13 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
     Context context;
     ArrayList<MyPickup> list;
     private RecyclerViewClickInerface recyclerViewClickInerface;
+    private String address;
 
     public MyAdapterMyPickup(Context context, ArrayList<MyPickup> list, RecyclerViewClickInerface recyclerViewClickInerface) {
         this.context = context;
         this.list = list;
         this.recyclerViewClickInerface = recyclerViewClickInerface;
+        getAddress();
     }
 
     @NonNull
@@ -55,6 +57,34 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item_mypickup, parent, false);
         return new MyViewHolder(v);
+
+    }
+
+    public void getAddress(){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        String requestURL = "https://studev.groept.be/api/a21pt111/getAllParamFromMypickup/" + LoginActivity.usernameFromLogin;
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject curObject = response.getJSONObject(i);
+                                address = curObject.getString("pickupAddress");
+
+                            }
+                        } catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(getApplicationContext(), "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(request);
     }
 
     @Override
@@ -131,9 +161,10 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
     }
 
     private void openGoogleMaps() {
+        //waar je maps gaat openen
         Intent intent = new Intent(Intent.ACTION_VIEW);
         String coordinatenGroepT = "50.874986,4.707685";
-        intent.setData(Uri.parse("geo:" + coordinatenGroepT));
+        intent.setData(Uri.parse("geo:0,0?q=" + address));
         Intent chooser = Intent.createChooser(intent, "Launch Maps");
         context.startActivity(chooser);
     }

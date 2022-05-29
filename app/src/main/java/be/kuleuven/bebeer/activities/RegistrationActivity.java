@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private TextView TVpassword2;
     private TextView TVpassword1;
     private TextView TVusername;
+    private TextView EThousNr, ETzipCode;
 
     private Button btnRegister;
 
@@ -51,6 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private String address;
     private String password1;
     private String password2;
+    private String housNr, zipCode;
 
     private ArrayList<String> users = new ArrayList<>();
 
@@ -70,6 +73,9 @@ public class RegistrationActivity extends AppCompatActivity {
         TVpassword1 = (TextView) findViewById(R.id.txtPaswordAC);
         TVpassword2 = (TextView) findViewById(R.id.txtPasword2AC);
         TVusername = (TextView) findViewById(R.id.txtUsernameAC);
+        EThousNr = (EditText) findViewById(R.id.invNr);
+        ETzipCode = (EditText) findViewById(R.id.invZip);
+
 
         btnRegister = (Button) findViewById(R.id.btnRegister);
 
@@ -116,8 +122,11 @@ public class RegistrationActivity extends AppCompatActivity {
         birthdate = ETbirthdate.getText().toString();
         phonenumber = ETphonenumber.getText().toString();
         address = ETaddress.getText().toString();
+        housNr = EThousNr.getText().toString();
+        zipCode = ETzipCode.getText().toString();
         password1 = ETpassword1.getText().toString();
         password2 = ETpassword2.getText().toString();
+
     }
 
     public void registerUser() {
@@ -128,7 +137,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 .append("/" + firstname)
                 .append("/" + phonenumber)
                 .append("/" + hashPassword)
-                .append("/" + address)
+                .append("/" + address + " " + housNr + ", " + zipCode)
                 .append("/" + birthdate);
         String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + sb;
         //String requestURL = "https://studev.groept.be/api/a21pt111/registerNewPerson/" + username + "/" + name + "/" + firstname + "/" + phonenumber + "/" + password1 + "/" + address + "/" + birthdate;
