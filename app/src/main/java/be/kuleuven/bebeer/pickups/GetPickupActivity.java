@@ -21,10 +21,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import be.kuleuven.bebeer.R;
-import be.kuleuven.bebeer.pickups.MyAdapterPickup;
-import be.kuleuven.bebeer.pickups.Pickup;
+import be.kuleuven.bebeer.activities.RecyclerViewClickInerface;
 
-public class GetPickupActivity extends AppCompatActivity {
+public class GetPickupActivity extends AppCompatActivity implements RecyclerViewClickInerface {
 
     RecyclerView recyclerView;
     MyAdapterPickup myAdapterPickup;
@@ -41,14 +40,14 @@ public class GetPickupActivity extends AppCompatActivity {
         recyclerView.setLayoutManager((new LinearLayoutManager(this)));
 
         list = new ArrayList<>();
-        myAdapterPickup = new MyAdapterPickup(this, list);
+        myAdapterPickup = new MyAdapterPickup(this, list, this);
         recyclerView.setAdapter(myAdapterPickup);
 
-        getPickupsInList();
+        getPickupsInRecyclerView();
 
     }
 
-    public void getPickupsInList() {
+    public void getPickupsInRecyclerView() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String requestURL = "https://studev.groept.be/api/a21pt111/getAllParamFromPickup";
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -60,6 +59,7 @@ public class GetPickupActivity extends AppCompatActivity {
                                 JSONObject curObject = response.getJSONObject(i);
 
                                 String pickupID = curObject.getString("id");
+                                System.out.println(pickupID);
                                 String usernameGive = curObject.getString("usernameGive");
                                 String address = curObject.getString("address");
                                 String quantityBak = curObject.getString("quantityBak");
@@ -81,5 +81,11 @@ public class GetPickupActivity extends AppCompatActivity {
                     }
                 });
         requestQueue.add(request);
+    }
+
+    @Override
+    public void updateRecyclerview() {
+        list.clear();
+        getPickupsInRecyclerView();
     }
 }

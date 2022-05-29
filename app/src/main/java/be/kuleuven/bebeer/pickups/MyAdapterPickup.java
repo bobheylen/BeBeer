@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.LoginActivity;
+import be.kuleuven.bebeer.activities.RecyclerViewClickInerface;
 
 import java.util.ArrayList;
 
@@ -28,10 +29,12 @@ public class MyAdapterPickup extends RecyclerView.Adapter<MyAdapterPickup.MyView
 
     Context context;
     ArrayList<Pickup> list;
+    private RecyclerViewClickInerface recyclerViewClickInerface;
 
-    public MyAdapterPickup(Context context, ArrayList<Pickup> list) {
+    public MyAdapterPickup(Context context, ArrayList<Pickup> list, RecyclerViewClickInerface recyclerViewClickInerface) {
         this.context = context;
         this.list = list;
+        this.recyclerViewClickInerface = recyclerViewClickInerface;
     }
 
     @NonNull
@@ -61,6 +64,7 @@ public class MyAdapterPickup extends RecyclerView.Adapter<MyAdapterPickup.MyView
                             public void onResponse(String response) {
                                 //Toast.makeText(context,"Pickup: " + pickup.getPickupID() + " successfully deleted from database", Toast.LENGTH_SHORT).show();
                                 Log.d("MyAdapterPickup", "***** Pickup successfully deleted from database *****");
+                                recyclerViewClickInerface.updateRecyclerview();
                             }
                         },
                         new Response.ErrorListener() {

@@ -22,10 +22,11 @@ import java.util.ArrayList;
 
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.LoginActivity;
+import be.kuleuven.bebeer.activities.RecyclerViewClickInerface;
 import be.kuleuven.bebeer.myPickups.MyAdapterMyPickup;
 import be.kuleuven.bebeer.myPickups.MyPickup;
 
-public class MyPickupActivity extends AppCompatActivity {
+public class MyPickupActivity extends AppCompatActivity implements RecyclerViewClickInerface {
 
     RecyclerView recyclerView;
     MyAdapterMyPickup myAdapterMyPickup;
@@ -41,7 +42,7 @@ public class MyPickupActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapterMyPickup = new MyAdapterMyPickup(this, list);
+        myAdapterMyPickup = new MyAdapterMyPickup(this, list, this);
         recyclerView.setAdapter(myAdapterMyPickup);
 
         getMyPickupsInRecyclerView();
@@ -84,5 +85,11 @@ public class MyPickupActivity extends AppCompatActivity {
                     }
                 });
         requestQueue.add(request);
+    }
+
+    @Override
+    public void updateRecyclerview() {
+        list.clear();
+        getMyPickupsInRecyclerView();
     }
 }

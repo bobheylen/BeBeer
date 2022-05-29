@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,10 +23,11 @@ import java.util.ArrayList;
 
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.LoginActivity;
+import be.kuleuven.bebeer.activities.RecyclerViewClickInerface;
 import be.kuleuven.bebeer.myOrders.MyAdapterOrder;
 import be.kuleuven.bebeer.myOrders.Order;
 
-public class OrderActivity extends AppCompatActivity {
+public class OrderActivity extends AppCompatActivity implements RecyclerViewClickInerface {
 
     RecyclerView recyclerView;
     MyAdapterOrder myAdapterOrder;
@@ -41,7 +43,7 @@ public class OrderActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapterOrder = new MyAdapterOrder(this, list);
+        myAdapterOrder = new MyAdapterOrder(this, list, this);
         recyclerView.setAdapter(myAdapterOrder);
 
         getOrdersInRecyclerView();
@@ -80,5 +82,11 @@ public class OrderActivity extends AppCompatActivity {
                     }
                 });
         requestQueue.add(request);
+    }
+
+    @Override
+    public void updateRecyclerview() {
+        list.clear();
+        getOrdersInRecyclerView();
     }
 }

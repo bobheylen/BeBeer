@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import be.kuleuven.bebeer.R;
+import be.kuleuven.bebeer.activities.RecyclerViewClickInerface;
 
 import java.util.ArrayList;
 
@@ -26,10 +27,12 @@ public class MyAdapterOrder extends RecyclerView.Adapter<MyAdapterOrder.MyViewHo
 
     Context context;
     ArrayList<Order> list;
+    private RecyclerViewClickInerface recyclerViewClickInerface;
 
-    public MyAdapterOrder(Context context, ArrayList<Order> list) {
+    public MyAdapterOrder(Context context, ArrayList<Order> list, RecyclerViewClickInerface recyclerViewClickInerface) {
         this.context = context;
         this.list = list;
+        this.recyclerViewClickInerface = recyclerViewClickInerface;
     }
 
     @NonNull
@@ -56,6 +59,7 @@ public class MyAdapterOrder extends RecyclerView.Adapter<MyAdapterOrder.MyViewHo
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(context,"Order: " + order.getOrderID() + " successfully canceled", Toast.LENGTH_SHORT).show();
+                                recyclerViewClickInerface.updateRecyclerview();
                             }
                         },
                         new Response.ErrorListener() {

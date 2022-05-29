@@ -35,16 +35,19 @@ import java.util.ArrayList;
 
 import be.kuleuven.bebeer.R;
 import be.kuleuven.bebeer.activities.LoginActivity;
+import be.kuleuven.bebeer.activities.RecyclerViewClickInerface;
 
 public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.MyViewHolder> {
 
     private static final int REQUEST_CALL = 1;
     Context context;
     ArrayList<MyPickup> list;
+    private RecyclerViewClickInerface recyclerViewClickInerface;
 
-    public MyAdapterMyPickup(Context context, ArrayList<MyPickup> list) {
+    public MyAdapterMyPickup(Context context, ArrayList<MyPickup> list, RecyclerViewClickInerface recyclerViewClickInerface) {
         this.context = context;
         this.list = list;
+        this.recyclerViewClickInerface = recyclerViewClickInerface;
     }
 
     @NonNull
@@ -87,6 +90,7 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(context,"Pickup: " + myPickup.getMyPickupID() + " successfully deleted", Toast.LENGTH_SHORT).show();
+                                recyclerViewClickInerface.updateRecyclerview();
                             }
                         },
                         new Response.ErrorListener() {
