@@ -62,22 +62,21 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        ETusername = (EditText) findViewById(R.id.invUsernameAC);
-        ETname = (EditText) findViewById(R.id.invNameAC);
-        ETfirstname = (EditText) findViewById(R.id.invFirstNameAC);
-        ETbirthdate = (EditText) findViewById(R.id.invBirthdateAC);
-        ETphonenumber = (EditText) findViewById(R.id.invPhoneNumAC);
-        ETaddress = (EditText) findViewById(R.id.invAddressAC);
-        ETpassword1 = (EditText) findViewById(R.id.invPasswordAC);
-        ETpassword2 = (EditText) findViewById(R.id.invPasswordAC2);
-        TVpassword1 = (TextView) findViewById(R.id.txtPaswordAC);
-        TVpassword2 = (TextView) findViewById(R.id.txtPasword2AC);
-        TVusername = (TextView) findViewById(R.id.txtUsernameAC);
-        EThousNr = (EditText) findViewById(R.id.invNr);
-        ETzipCode = (EditText) findViewById(R.id.invZip);
+        ETusername = findViewById(R.id.invUsernameAC);
+        ETname = findViewById(R.id.invNameAC);
+        ETfirstname = findViewById(R.id.invFirstNameAC);
+        ETbirthdate = findViewById(R.id.invBirthdateAC);
+        ETphonenumber = findViewById(R.id.invPhoneNumAC);
+        ETaddress = findViewById(R.id.invAddressAC);
+        ETpassword1 = findViewById(R.id.invPasswordAC);
+        ETpassword2 = findViewById(R.id.invPasswordAC2);
+        TVpassword1 = findViewById(R.id.txtPaswordAC);
+        TVpassword2 = findViewById(R.id.txtPasword2AC);
+        TVusername = findViewById(R.id.txtUsernameAC);
+        EThousNr = findViewById(R.id.invNr);
+        ETzipCode = findViewById(R.id.invZip);
 
-
-        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnRegister = findViewById(R.id.btnRegister);
 
         getAllUsername();
 

@@ -50,27 +50,24 @@ public class MyAdapterOrder extends RecyclerView.Adapter<MyAdapterOrder.MyViewHo
         holder.orderDate.setText(order.getOrderDate());
         holder.orderAddress.setText(order.getOrderAddress());
 
-        holder.btnCancelOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String requestURL = "https://studev.groept.be/api/a21pt111/deleteOrder/" + order.getOrderID();
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Toast.makeText(context, "Order: " + order.getOrderID() + " successfully canceled", Toast.LENGTH_SHORT).show();
-                                recyclerViewClickInerface.updateRecyclerview();
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-                RequestQueue queue = Volley.newRequestQueue(context);
-                queue.add(stringRequest);
-            }
+        holder.btnCancelOrder.setOnClickListener(view -> {
+            String requestURL = "https://studev.groept.be/api/a21pt111/deleteOrder/" + order.getOrderID();
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(context, "Order: " + order.getOrderID() + " successfully canceled", Toast.LENGTH_SHORT).show();
+                            recyclerViewClickInerface.updateRecyclerview();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+            RequestQueue queue = Volley.newRequestQueue(context);
+            queue.add(stringRequest);
         });
     }
 

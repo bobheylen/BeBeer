@@ -41,13 +41,13 @@ public class placePickupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_pickup);
 
-        btnPlus = (Button) findViewById(R.id.btnPlusBack);
-        btnMin = (Button) findViewById(R.id.btnMinBack);
-        txtAmountOfBack = (TextView) findViewById(R.id.txtAmountOfBack);
-        btnPlacePick = (Button) findViewById(R.id.btnGetPikupPK);
-        invAddres = (EditText) findViewById(R.id.invAddresPikup);
-        spTime = (Spinner) findViewById(R.id.spTimePikup);
-        dateView = (CalendarView) findViewById(R.id.dateView);
+        btnPlus = findViewById(R.id.btnPlusBack);
+        btnMin = findViewById(R.id.btnMinBack);
+        txtAmountOfBack = findViewById(R.id.txtAmountOfBack);
+        btnPlacePick = findViewById(R.id.btnGetPikupPK);
+        invAddres = findViewById(R.id.invAddresPikup);
+        spTime = findViewById(R.id.spTimePikup);
+        dateView = findViewById(R.id.dateView);
 
         getInfo();
 
@@ -148,6 +148,5 @@ public class placePickupActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
         toast.show();
     }
-
 
 }

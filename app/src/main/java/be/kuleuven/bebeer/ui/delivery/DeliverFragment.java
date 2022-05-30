@@ -36,9 +36,9 @@ import be.kuleuven.bebeer.databinding.FragmentDeliverBinding;
 
 public class DeliverFragment extends Fragment {
 
-    private FragmentDeliverBinding binding;
     //----- Aanmaken van fields -----
     private static final String TAG = "CalendarActivity";
+    private FragmentDeliverBinding binding;
     private Button btnPlus, btnMinus, btnOrder;
     private TextView lblQty, lblPrice;
     private EditText invAddress;
@@ -101,42 +101,31 @@ public class DeliverFragment extends Fragment {
         });
 
 
-        btnPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = LoginActivity.usernameFromLogin;
-                System.out.println(username);
-                int quantity = Integer.parseInt(lblQty.getText().toString()) + 1;
+        btnPlus.setOnClickListener(view -> {
+            String username = LoginActivity.usernameFromLogin;
+            System.out.println(username);
+            int quantity = Integer.parseInt(lblQty.getText().toString()) + 1;
+            lblQty.setText(Integer.toString(quantity));
+            btnMinus.setEnabled(true);
+            btnOrder.setEnabled(true);
+
+            setNewPrice(); // Set price when you change quantity
+        });
+
+        btnMinus.setOnClickListener(view -> {
+            int quantity = Integer.parseInt(lblQty.getText().toString()) - 1;
+            if (quantity == 0) {
                 lblQty.setText(Integer.toString(quantity));
-                btnMinus.setEnabled(true);
-                btnOrder.setEnabled(true);
-
-                setNewPrice(); // Set price when you change quantity
+                btnMinus.setEnabled(false);
+                btnOrder.setEnabled(false);
+            } else {
+                lblQty.setText(Integer.toString(quantity));
             }
+
+            setNewPrice(); // Set price when you change quantity
         });
 
-        btnMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int quantity = Integer.parseInt(lblQty.getText().toString()) - 1;
-                if (quantity == 0) {
-                    lblQty.setText(Integer.toString(quantity));
-                    btnMinus.setEnabled(false);
-                    btnOrder.setEnabled(false);
-                } else {
-                    lblQty.setText(Integer.toString(quantity));
-                }
-
-                setNewPrice(); // Set price when you change quantity
-            }
-        });
-
-        btnOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                placeOrder();
-            }
-        });
+        btnOrder.setOnClickListener(view -> placeOrder());
         //---------- Tot hier zelf toegevoegd ----------
 
         return root;

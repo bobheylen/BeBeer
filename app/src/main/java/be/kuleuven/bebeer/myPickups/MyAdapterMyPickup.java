@@ -60,7 +60,7 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
 
     }
 
-    public void getAddress(){
+    public void getAddress() {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         String requestURL = "https://studev.groept.be/api/a21pt111/getAllParamFromMypickup/" + LoginActivity.usernameFromLogin;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -97,67 +97,34 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
         holder.myPickupQuantity.setText(myPickup.getMyPickupQuantity());
         holder.myPickupPhonenumber.setText(myPickup.getMyPickupPhonenumber());
 
-        holder.btnMaps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openGoogleMaps();
-            }
-        });
+        holder.btnMaps.setOnClickListener(view -> openGoogleMaps());
 
-        holder.btnCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                makePhoneCall();
-            }
-        });
+        holder.btnCall.setOnClickListener(view -> makePhoneCall());
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String requestURL = "https://studev.groept.be/api/a21pt111/deleteMyPickup/" + myPickup.getMyPickupID();
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Toast.makeText(context, "Pickup: " + myPickup.getMyPickupID() + " successfully deleted", Toast.LENGTH_SHORT).show();
-                                recyclerViewClickInerface.updateRecyclerview();
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-                RequestQueue queue = Volley.newRequestQueue(context);
-                queue.add(stringRequest);
-            }
+        holder.btnDelete.setOnClickListener(view -> {
+            String requestURL = "https://studev.groept.be/api/a21pt111/deleteMyPickup/" + myPickup.getMyPickupID();
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, requestURL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(context, "Pickup: " + myPickup.getMyPickupID() + " successfully deleted", Toast.LENGTH_SHORT).show();
+                            recyclerViewClickInerface.updateRecyclerview();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+            RequestQueue queue = Volley.newRequestQueue(context);
+            queue.add(stringRequest);
         });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
-    }
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-
-        TextView myPickupUsername, myPickupName, myPickupDate, myPickupAddress, myPickupQuantity, myPickupPhonenumber;
-        Button btnMaps, btnCall, btnDelete;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            myPickupUsername = itemView.findViewById(R.id.tvMypickupUsername);
-            myPickupName = itemView.findViewById(R.id.tvMypickupName);
-            myPickupDate = itemView.findViewById(R.id.tvMypickupDate);
-            myPickupAddress = itemView.findViewById(R.id.tvMypickupAddress);
-            myPickupQuantity = itemView.findViewById(R.id.tvMypickupQuantity);
-            myPickupPhonenumber = itemView.findViewById(R.id.tvMypickupPhonenumber);
-            btnMaps = itemView.findViewById(R.id.btnMaps);
-            btnCall = itemView.findViewById(R.id.btnCall);
-            btnDelete = itemView.findViewById(R.id.btnDelete);
-        }
     }
 
     private void openGoogleMaps() {
@@ -204,6 +171,26 @@ public class MyAdapterMyPickup extends RecyclerView.Adapter<MyAdapterMyPickup.My
                     }
                 });
         requestQueue.add(request);
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+        TextView myPickupUsername, myPickupName, myPickupDate, myPickupAddress, myPickupQuantity, myPickupPhonenumber;
+        Button btnMaps, btnCall, btnDelete;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            myPickupUsername = itemView.findViewById(R.id.tvMypickupUsername);
+            myPickupName = itemView.findViewById(R.id.tvMypickupName);
+            myPickupDate = itemView.findViewById(R.id.tvMypickupDate);
+            myPickupAddress = itemView.findViewById(R.id.tvMypickupAddress);
+            myPickupQuantity = itemView.findViewById(R.id.tvMypickupQuantity);
+            myPickupPhonenumber = itemView.findViewById(R.id.tvMypickupPhonenumber);
+            btnMaps = itemView.findViewById(R.id.btnMaps);
+            btnCall = itemView.findViewById(R.id.btnCall);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
+        }
     }
 
 }

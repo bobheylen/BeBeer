@@ -32,26 +32,39 @@ import be.kuleuven.bebeer.R;
 public class LoginActivity extends AppCompatActivity {
 
 
+    public static String usernameFromLogin; // Global variable om ook in andere klasses te kunnen gebruiken
     private EditText ETusername;
     private EditText ETpassword;
     private Button btnLogin;
     private TextView txtErrorUsername, txtErrorPassword;
-
-    public static String usernameFromLogin; // Global variable om ook in andere klasses te kunnen gebruiken
     private String password;
     private String passwordFromDB, hashPassword;
+
+    public static String hash(String ToHashPassword) {
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] digestMes = md.digest(ToHashPassword.getBytes());
+
+            BigInteger bigInt = new BigInteger(1, digestMes);
+            System.out.println("hashPassword ingegeven:" + bigInt.toString(16));
+            return bigInt.toString(16);
+        } catch (Exception e) {
+        }
+        return "";
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ETusername = (EditText) findViewById(R.id.invUsername);
-        ETpassword = (EditText) findViewById(R.id.invPassword);
-        txtErrorPassword = (TextView) findViewById(R.id.txtErrorPassword);
-        txtErrorUsername = (TextView) findViewById(R.id.txtErrorUsername);
+        ETusername = findViewById(R.id.invUsername);
+        ETpassword = findViewById(R.id.invPassword);
+        txtErrorPassword = findViewById(R.id.txtErrorPassword);
+        txtErrorUsername = findViewById(R.id.txtErrorUsername);
 
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin = findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(v -> {
             // place your clicking handle code here.
@@ -63,21 +76,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-    public static String hash(String ToHashPassword) {
-
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] digestMes = md.digest(ToHashPassword.getBytes());
-
-            BigInteger bigInt = new BigInteger(1, digestMes);
-            System.out.println("hasPassword ingegeven:" + bigInt.toString(16));
-            return bigInt.toString(16);
-        } catch (Exception e) {
-        }
-        return "";
-    }
-
 
     public void usernamePasswordCheck() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);

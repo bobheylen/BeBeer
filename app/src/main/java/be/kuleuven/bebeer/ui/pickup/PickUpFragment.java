@@ -30,22 +30,12 @@ public class PickUpFragment extends Fragment {
         binding = FragmentPickupBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        btnGetPickup = (ImageButton) root.findViewById(R.id.btnGetPikup);
-        btnMakePickup = (ImageButton) root.findViewById(R.id.btnMakePikup);
+        btnGetPickup = root.findViewById(R.id.btnGetPikup);
+        btnMakePickup = root.findViewById(R.id.btnMakePikup);
 
-        btnGetPickup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openGetPikupActivity();
-            }
-        });
+        btnGetPickup.setOnClickListener(view -> openGetPikupActivity());
 
-        btnMakePickup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openMakePikupActivity();
-            }
-        });
+        btnMakePickup.setOnClickListener(view -> openMakePikupActivity());
 
         return root;
     }

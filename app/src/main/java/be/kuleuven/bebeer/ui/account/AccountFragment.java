@@ -38,10 +38,10 @@ import be.kuleuven.bebeer.databinding.FragmentAccountBinding;
 
 public class AccountFragment extends Fragment {
 
+    private final ArrayList<String> users = new ArrayList<>();
     private FragmentAccountBinding binding;
     private String username = LoginActivity.usernameFromLogin;
     private EditText invUsernameAC;
-
     private Button btnSaveAC, btnOrders, btnMypickups;
     private String firstName;
     private EditText invFirstnameAC;
@@ -61,8 +61,6 @@ public class AccountFragment extends Fragment {
     private TextView txtPasword2AC;
     private TextView txtUsernameAC;
 
-    private ArrayList<String> users = new ArrayList<>();
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         AccountViewModel notificationsViewModel =
@@ -74,63 +72,50 @@ public class AccountFragment extends Fragment {
 
         //vanaf hier zelf geschrven
 
-        invNameAC = (EditText) root.findViewById(R.id.invNameAC);
-        invFirstnameAC = (EditText) root.findViewById(R.id.invFirstNameAC);
-        invbirthdateAC = (EditText) root.findViewById(R.id.invBirthdateAC);
-        invPhoneNumberAC = (EditText) root.findViewById(R.id.invPhoneNumAC);
-        invAddressAC = (EditText) root.findViewById(R.id.invAddressAC);
-        invUsernameAC = (EditText) root.findViewById(R.id.invUsernameAC);
-        btnSaveAC = (Button) root.findViewById(R.id.btnSaveAC);
-        btnOrders = (Button) root.findViewById(R.id.btnOrders);
-        btnMypickups = (Button) root.findViewById(R.id.btnMypickups);
-        invPassword = (EditText) root.findViewById(R.id.invPasswordAC);
-        invPassword2 = (EditText) root.findViewById(R.id.invPasswordAC2);
-        txtPaswordAC = (TextView) root.findViewById(R.id.txtPaswordAC);
-        txtPasword2AC = (TextView) root.findViewById(R.id.txtPasword2AC);
-        txtUsernameAC = (TextView) root.findViewById(R.id.txtUsernameAC);
+        invNameAC = root.findViewById(R.id.invNameAC);
+        invFirstnameAC = root.findViewById(R.id.invFirstNameAC);
+        invbirthdateAC = root.findViewById(R.id.invBirthdateAC);
+        invPhoneNumberAC = root.findViewById(R.id.invPhoneNumAC);
+        invAddressAC = root.findViewById(R.id.invAddressAC);
+        invUsernameAC = root.findViewById(R.id.invUsernameAC);
+        btnSaveAC = root.findViewById(R.id.btnSaveAC);
+        btnOrders = root.findViewById(R.id.btnOrders);
+        btnMypickups = root.findViewById(R.id.btnMypickups);
+        invPassword = root.findViewById(R.id.invPasswordAC);
+        invPassword2 = root.findViewById(R.id.invPasswordAC2);
+        txtPaswordAC = root.findViewById(R.id.txtPaswordAC);
+        txtPasword2AC = root.findViewById(R.id.txtPasword2AC);
+        txtUsernameAC = root.findViewById(R.id.txtUsernameAC);
 
 
         getInfo();
         getAllUsername();
 
-        btnSaveAC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // place your clicking handle code here.
-                getTextInParameters();
-                if (password.equals(password2)) {
-                    if (password.length() < 8) {
-                        txtPaswordAC.setText("Password too short!");
-                        txtPasword2AC.setText("Password too short!");
-                    } else {
-                        txtPaswordAC.setText("");
-                        txtPasword2AC.setText("");
-                        if (testUsernameAlreadyExist()) {
-                            save();
-                        } else {
-                            txtUsernameAC.setText("Username already exist!");
-                        }
-                    }
+        btnSaveAC.setOnClickListener(view -> {
+            // place your clicking handle code here.
+            getTextInParameters();
+            if (password.equals(password2)) {
+                if (password.length() < 8) {
+                    txtPaswordAC.setText("Password too short!");
+                    txtPasword2AC.setText("Password too short!");
                 } else {
                     txtPaswordAC.setText("");
-                    txtPasword2AC.setText("Passwords do NOT match!");
+                    txtPasword2AC.setText("");
+                    if (testUsernameAlreadyExist()) {
+                        save();
+                    } else {
+                        txtUsernameAC.setText("Username already exist!");
+                    }
                 }
+            } else {
+                txtPaswordAC.setText("");
+                txtPasword2AC.setText("Passwords do NOT match!");
             }
         });
 
-        btnOrders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openOrderActivity();
-            }
-        });
+        btnOrders.setOnClickListener(view -> openOrderActivity());
 
-        btnMypickups.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openMypickupActivity();
-            }
-        });
+        btnMypickups.setOnClickListener(view -> openMypickupActivity());
         //---------- Tot hier zelf toegevoegd ----------
 
 
@@ -153,8 +138,8 @@ public class AccountFragment extends Fragment {
 
         if (!(invPassword.getText().toString() == "")) {
             LoginActivity LA = new LoginActivity();
-            password = LA.hash(invPassword.getText().toString());
-            password2 = LA.hash(invPassword.getText().toString());
+            password = LoginActivity.hash(invPassword.getText().toString());
+            password2 = LoginActivity.hash(invPassword.getText().toString());
         }
     }
 
@@ -190,7 +175,6 @@ public class AccountFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + username;
         JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -261,11 +245,7 @@ public class AccountFragment extends Fragment {
         if (username.equals(LoginActivity.usernameFromLogin)) {
             return true;
         } else {
-            if (users.contains(username)) {
-                return false;
-            } else {
-                return true;
-            }
+            return !users.contains(username);
         }
     }
 
