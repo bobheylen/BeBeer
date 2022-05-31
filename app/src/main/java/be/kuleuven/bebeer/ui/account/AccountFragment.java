@@ -135,15 +135,18 @@ public class AccountFragment extends Fragment {
         birthdate = invbirthdateAC.getText().toString();
         phoneNum = invPhoneNumberAC.getText().toString();
         address = invAddressAC.getText().toString();
+        password = invPassword.getText().toString();
+        password2 = invPassword2.getText().toString();
+    }
+
+    public void save() {
 
         if (!(invPassword.getText().toString() == "")) {
             LoginActivity LA = new LoginActivity();
             password = LoginActivity.hash(invPassword.getText().toString());
             password2 = LoginActivity.hash(invPassword.getText().toString());
         }
-    }
 
-    public void save() {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         StringBuilder sb = new StringBuilder(name)
                 .append("/" + firstName)
