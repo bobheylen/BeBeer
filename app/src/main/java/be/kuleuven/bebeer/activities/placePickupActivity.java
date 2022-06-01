@@ -91,7 +91,6 @@ public class placePickupActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String requestURL = "https://studev.groept.be/api/a21pt111/All_infor_login/" + LoginActivity.usernameFromLogin;
         JsonArrayRequest loginRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {

@@ -99,4 +99,5 @@ public class MyPickupActivity extends AppCompatActivity implements RecyclerViewC
         list.clear();
         getMyPickupsInRecyclerView();
     }
+
 }

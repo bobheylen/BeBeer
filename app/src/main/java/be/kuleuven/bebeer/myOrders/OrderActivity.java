@@ -154,4 +154,5 @@ public class OrderActivity extends AppCompatActivity implements RecyclerViewClic
         list.clear();
         getOrdersInRecyclerView();
     }
+
 }

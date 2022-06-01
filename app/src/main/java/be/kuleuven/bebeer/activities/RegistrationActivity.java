@@ -192,4 +192,5 @@ public class RegistrationActivity extends AppCompatActivity {
             return true;
         }
     }
+
 }

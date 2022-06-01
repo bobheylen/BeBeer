@@ -267,4 +267,5 @@ public class AccountFragment extends Fragment {
         Intent intent = new Intent(getActivity().getApplicationContext(), MyPickupActivity.class);
         startActivity(intent);
     }
+
 }

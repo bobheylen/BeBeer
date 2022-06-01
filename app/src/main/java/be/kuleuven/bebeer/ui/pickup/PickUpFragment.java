@@ -57,4 +57,5 @@ public class PickUpFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

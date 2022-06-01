@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
     private String passwordFromDB, hashPassword;
 
     public static String hash(String ToHashPassword) {
-
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] digestMes = md.digest(ToHashPassword.getBytes());
